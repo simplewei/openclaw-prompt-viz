@@ -42,6 +42,12 @@
       "zip_url": "http://lightmake.site/api/v1/download?slug=summarize",
       "source": "skillhub",
       "version": "1.0.0"
+    },
+    "gog": {
+      "name": "Gog",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=gog",
+      "source": "skillhub",
+      "version": "1.0.0"
     }
   }
 }
