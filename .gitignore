@@ -1,42 +1,83 @@
-# OpenClaw 备份 - 只包含核心配置和记忆
+# OpenClaw Backup - Keep only essential config and memories
 
-# 排除 Python 虚拟环境
+# Dependencies and build artifacts
+.env
 .venv
 env/
 venv/
 ENV/
 VENV/
-
-# 排除 Node.js 依赖
 node_modules/
+npm-debug.log
+yarn-error.log
 
-# 排除技能依赖
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+
+# Skill dependencies (keep only SKILL.md and scripts/)
 skills/*/.venv/
 skills/*/env/
 skills/*/lib/
-skills/*/node_modules/
 skills/*/.venv*
+skills/*/node_modules/
 skills/*/dist/
 skills/*/build/
 skills/*/*.egg-info/
 
-# 排除浏览器数据和依赖
+# Browser data (should not be backed up)
 skills/*/data/browser_state/
 
-# 排除临时文件、日志、缓存
-*.log
-*.tmp
+# Temporary files
 tmp/
 temp/
+*.tmp
 
-# 排除本地配置文件（可能包含敏感信息）
-.env
+# Local configuration (may contain secrets)
 config.local.json
 secrets.json
 credentials.json
 *.pem
 *.key
 
-# 系统文件
-.DS_Store
-Thumbs.db
+# Backup location (we're creating the backup itself)
+openclaw-backup/
+
+# Optional: Uncomment if you want to exclude memories from backup
+# memory/
+
+# Optional: Uncomment if you want to exclude skills from backup
+# skills/
