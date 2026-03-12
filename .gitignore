@@ -1,0 +1,42 @@
+# OpenClaw 备份 - 只包含核心配置和记忆
+
+# 排除 Python 虚拟环境
+.venv
+env/
+venv/
+ENV/
+VENV/
+
+# 排除 Node.js 依赖
+node_modules/
+
+# 排除技能依赖
+skills/*/.venv/
+skills/*/env/
+skills/*/lib/
+skills/*/node_modules/
+skills/*/.venv*
+skills/*/dist/
+skills/*/build/
+skills/*/*.egg-info/
+
+# 排除浏览器数据和依赖
+skills/*/data/browser_state/
+
+# 排除临时文件、日志、缓存
+*.log
+*.tmp
+tmp/
+temp/
+
+# 排除本地配置文件（可能包含敏感信息）
+.env
+config.local.json
+secrets.json
+credentials.json
+*.pem
+*.key
+
+# 系统文件
+.DS_Store
+Thumbs.db

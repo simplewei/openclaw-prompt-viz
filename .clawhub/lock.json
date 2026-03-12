@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "skills": {
+    "openclaw-tavily-search": {
+      "version": "0.1.0",
+      "installedAt": 1773236987014
+    },
+    "github-cli-tool": {
+      "version": "1.0.0",
+      "installedAt": 1773283848158
+    },
+    "humanizer-zh": {
+      "version": "1.0.0",
+      "installedAt": 1773285295834
+    },
+    "polymarketodds-1-0-0": {
+      "version": "1.0.0",
+      "installedAt": 1773285349251
+    },
+    "notebooklm-skill": {
+      "version": "0.1.0",
+      "installedAt": 1773285545489
+    },
+    "feishu-doc-manager": {
+      "version": "1.0.0",
+      "installedAt": 1773287515515
+    },
+    "feishu-docs": {
+      "version": "1.1.1",
+      "installedAt": 1773288392228
+    },
+    "summarize": {
+      "version": "1.0.0",
+      "installedAt": 1773294416545
+    }
+  }
+}

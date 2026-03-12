@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "skills": {
+    "github-cli-tool": {
+      "name": "GitHub CLI",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=github-cli-tool",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "humanizer-zh": {
+      "name": "humanizer-zh",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=humanizer-zh",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "polymarketodds-1-0-0": {
+      "name": "Polymarketodds 1.0.0",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=polymarketodds-1-0-0",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "notebooklm-skill": {
+      "name": "Notebooklm",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=notebooklm-skill",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "feishu-doc-manager": {
+      "name": "📄 Feishu Doc Manager | 飞书文档管理器",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=feishu-doc-manager",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "feishu-docs": {
+      "name": "飞书文档API技能",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=feishu-docs",
+      "source": "skillhub",
+      "version": "1.1.1"
+    },
+    "summarize": {
+      "name": "Summarize",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=summarize",
+      "source": "skillhub",
+      "version": "1.0.0"
+    }
+  }
+}
