@@ -48,6 +48,12 @@
       "zip_url": "https://lightmake.site/api/v1/download?slug=gog",
       "source": "skillhub",
       "version": "1.0.0"
+    },
+    "dingtalk-docs": {
+      "name": "dingtalk-docs",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=dingtalk-docs",
+      "source": "skillhub",
+      "version": "0.3.4"
     }
   }
 }

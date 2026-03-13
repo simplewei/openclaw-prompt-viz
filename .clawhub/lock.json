@@ -36,6 +36,10 @@
     "gog": {
       "version": "1.0.0",
       "installedAt": 1773323008011
+    },
+    "dingtalk-docs": {
+      "version": "0.3.4",
+      "installedAt": 1773386838713
     }
   }
 }
