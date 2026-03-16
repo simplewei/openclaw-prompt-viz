@@ -17,7 +17,7 @@ if git status --porcelain | grep -q .; then
   # 使用时间戳作为提交信息
   TIMESTAMP=$(date +"%Y-%m-%d %H:%M")
   git commit -m "每小时自动备份: $TIMESTAMP" || true
-  git push origin main
+  git pull --rebase origin main && git push origin main
   echo "备份完成"
 else
   echo "无变更，跳过备份"
