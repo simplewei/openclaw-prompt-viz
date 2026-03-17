@@ -60,7 +60,7 @@
       text-align: center;
       position: relative;
       z-index: 2;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
     }
     .flow-step:hover {
       transform: translateY(-5px);
@@ -70,6 +70,10 @@
       background: rgba(0, 212, 255, 0.25);
       border-color: #00ffaa;
       box-shadow: 0 0 20px rgba(0, 255, 170, 0.4);
+    }
+    .flow-step.completed {
+      background: rgba(0, 255, 170, 0.2);
+      border-color: #00ffaa;
     }
     .flow-step h3 {
       font-size: 1rem;
@@ -88,6 +92,14 @@
       position: relative;
       top: -10px;
     }
+    .arrow.animated {
+      background: linear-gradient(90deg, #00ffaa, #00d4ff);
+      animation: arrowPulse 1s ease-in-out infinite;
+    }
+    @keyframes arrowPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
     .arrow::after {
       content: '→';
       position: absolute;
@@ -95,6 +107,105 @@
       top: -12px;
       font-size: 24px;
       color: #7b2ff7;
+    }
+    .interactive-demo {
+      background: rgba(0,0,0,0.3);
+      border-radius: 16px;
+      padding: 30px;
+      margin: 40px 0;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .demo-title {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #00d4ff;
+    }
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .input-group input {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      color: #e0e0e0;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .input-group input:focus {
+      border-color: #00d4ff;
+    }
+    .input-group button {
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: opacity 0.3s, transform 0.2s;
+    }
+    .input-group button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    .input-group button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .log-area {
+      background: rgba(0,0,0,0.5);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      max-height: 600px;
+      overflow-y: auto;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .log-entry {
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      gap: 8px;
+    }
+    .log-entry:last-child {
+      border-bottom: none;
+    }
+    .log-time {
+      color: #666;
+      min-width: 80px;
+    }
+    .log-phase {
+      color: #00d4ff;
+      font-weight: bold;
+      min-width: 120px;
+    }
+    .log-detail {
+      color: #ccc;
+    }
+    .log-prompt {
+      color: #f1fa8c;
+      background: rgba(255,255,255,0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+    .log-tool {
+      color: #ff79c6;
+    }
+    .log-result {
+      color: #00ffaa;
     }
     .sections {
       display: grid;
@@ -286,6 +397,21 @@
         <div class="flow-step" data-step="5">
           <h3>5. Model Call</h3>
           <p>LLM 推理</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="interactive-demo">
+      <h2 class="demo-title">🔍 交互式演示：观察 OpenClaw 如何处理你的消息</h2>
+      <div class="input-group">
+        <input type="text" id="userInput" placeholder="输入你想让 OpenClaw 处理的消息（例如：'查看当前时间'、'读取 AGENTS.md 内容'）" />
+        <button id="submitBtn" onclick="runDemo()">开始执行</button>
+      </div>
+      <div class="log-area" id="logArea">
+        <div class="log-entry">
+          <span class="log-time">[等待]</span>
+          <span class="log-phase">系统</span>
+          <span class="log-detail">在上方输入框输入消息，点击"开始执行"观察完整处理流程。</span>
         </div>
       </div>
     </div>
@@ -632,7 +758,7 @@ module.exports = {
         <li><span class="bullet">•</span> OpenClaw 拥有自己的 <strong>系统提示构建系统</strong>，不使用 pi-agent 默认提示</li>
         <li><span class="bullet">•</span> 引导文件 <strong>自动注入</strong> 到系统提示，消耗上下文窗口</li>
         <li><span class="bullet">•</span> 工具列表（文本）+ <strong>工具 schemas（JSON）</strong> 双重开销</li>
-        <li><span class="bullet">•</span> Skills 仅注入元数据，<strong>按需读取</selector> SKILL.md</li>
+        <li><span class="bullet">•</span> Skills 仅注入元数据，<strong>按需读取</strong> SKILL.md</li>
         <li><span class="bullet">•</span> <strong>Compaction</strong> 持久化压缩历史；<strong>Pruning</strong> 临时修剪内存（仅针对 Anthropic 缓存）</li>
         <li><span class="bullet">•</span> 使用 <code>/context</code>、<code>/status</code>、<code>/compact</code> 管理上下文窗口</li>
         <li><span class="bullet">•</span> hook 系统允许在 <strong>提示构建前</strong> 或 <strong>工具调用前后</strong> 拦截修改</li>
@@ -656,13 +782,11 @@ module.exports = {
     document.querySelectorAll('.flow-step').forEach(step => {
       step.addEventListener('click', function() {
         const stepNum = this.dataset.step;
-        // 移除所有激活状态
         document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('active', 'highlight'));
         document.querySelectorAll('.card').forEach(c => c.style.borderColor = '');
 
         this.classList.add('active', 'highlight');
 
-        // 高亮对应卡片
         const cardMap = {
           '1': 'card-bootstrap',
           '2': 'card-session',
@@ -678,6 +802,162 @@ module.exports = {
           }
         }
       });
+    });
+
+    // 模拟演示逻辑
+    const phaseDescriptions = [
+      {
+        name: "Inbound Message",
+        detail: (input) => `接收用户消息: "${input}" → 路由到 sessionKey="main"`
+      },
+      {
+        name: "Session Resolution",
+        detail: (input) => `验证设备身份 → 加载会话历史（最近 ${Math.floor(Math.random()*10)+5} 条消息）`
+      },
+      {
+        name: "Bootstrap Load",
+        detail: (input) => `注入引导文件 #count=8: AGENTS.md, SOUL.md, TOOLS.md, IDENTITY.md, USER.md, HEARTBEAT.md, BOOTSTRAP.md, MEMORY.md`
+      },
+      {
+        name: "System Prompt Build",
+        detail: (input) => `组装 Prompt:
+  • Tooling: ${Math.floor(Math.random()*15)+10} 个工具
+  • Skills: ${Math.floor(Math.random()*3)+1} 个技能元数据
+  • Bootstrap: ${(Math.random()*50000+30000).toFixed(0)} 字符
+  • Total: ~${(Math.random()*20000+30000).toFixed(0)} tok`
+      },
+      {
+        name: "Model Call",
+        detail: (input) => `发送到 LLM (openrouter/stepfun/step-3.5-flash:free) → 流式推理中...`
+      }
+    ];
+
+    async function runDemo() {
+      const input = document.getElementById('userInput').value.trim();
+      const btn = document.getElementById('submitBtn');
+      const logArea = document.getElementById('logArea');
+
+      if (!input) {
+        alert('请输入消息');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = '执行中...';
+      logArea.innerHTML = '';
+
+      // 重置流程步骤状态
+      document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('completed', 'active'));
+      document.querySelectorAll('.arrow').forEach(a => a.classList.remove('animated'));
+
+      let delay = 0;
+
+      for (let i = 1; i <= phaseDescriptions.length; i++) {
+        setTimeout(() => {
+          // 更新流程动画
+          const stepEl = document.querySelector(`.flow-step[data-step="${i}"]`);
+          const prevStep = document.querySelector(`.flow-step[data-step="${i-1}"]`);
+          const arrow = document.querySelectorAll('.arrow')[i-1];
+
+          if (prevStep) prevStep.classList.add('completed');
+          stepEl.classList.add('active');
+          if (arrow) arrow.classList.add('animated');
+
+          // 添加日志
+          const time = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+          const phase = phaseDescriptions[i-1].name;
+          const detail = phaseDescriptions[i-1].detail(input);
+
+          const logEntry = document.createElement('div');
+          logEntry.className = 'log-entry';
+          logEntry.innerHTML = `
+            <span class="log-time">[${time}]</span>
+            <span class="log-phase">${phase}</span>
+            <span class="log-detail">${detail}</span>
+          `;
+          logArea.appendChild(logEntry);
+          logArea.scrollTop = logArea.scrollHeight;
+
+          // 模拟工具调用（随机）
+          if (i === phaseDescriptions.length) {
+            setTimeout(() => {
+              simulateToolCalls(logArea);
+            }, 1000);
+          }
+
+          // 完成最后一个步骤
+          if (i === phaseDescriptions.length) {
+            setTimeout(() => {
+              stepEl.classList.remove('active');
+              stepEl.classList.add('completed');
+              const finalArrow = document.querySelectorAll('.arrow')[i-1];
+              if (finalArrow) finalArrow.classList.add('animated');
+
+              const time2 = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+              const finalLog = document.createElement('div');
+              finalLog.className = 'log-entry';
+              finalLog.innerHTML = `
+                <span class="log-time">[${time2}]</span>
+                <span class="log-phase">Response</span>
+                <span class="log-detail">✅ 处理完成！回复已发送给用户。</span>
+              `;
+              logArea.appendChild(finalLog);
+              logArea.scrollTop = logArea.scrollHeight;
+
+              btn.disabled = false;
+              btn.textContent = '开始执行';
+            }, 2000);
+          }
+        }, delay);
+        delay += 1500;
+      }
+    }
+
+    function simulateToolCalls(logArea) {
+      const tools = ['read', 'exec', 'session_status', 'memory_search'];
+      const toolCount = Math.floor(Math.random() * 3) + 1;
+      let tDelay = 0;
+
+      for (let t = 0; t < toolCount; t++) {
+        setTimeout(() => {
+          const tool = tools[Math.floor(Math.random() * tools.length)];
+          const time = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+
+          const toolStart = document.createElement('div');
+          toolStart.className = 'log-entry';
+          toolStart.innerHTML = `
+            <span class="log-time">[${time}]</span>
+            <span class="log-phase">Tool Call</span>
+            <span class="log-detail"><span class="log-tool">${tool}</span>() 执行中...</span>
+          `;
+          logArea.appendChild(toolStart);
+          logArea.scrollTop = logArea.scrollHeight;
+
+          setTimeout(() => {
+            const time2 = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+            const result = tool === 'read' ? `文件内容已读取 (${(Math.random()*5000+500).toFixed(0)} 字符)` :
+                          tool === 'exec' ? `命令执行完成，退出码 0` :
+                          tool === 'session_status' ? `会话状态: 上下文 ${(Math.random()*30+10).toFixed(1)}/32K tok` :
+                          `找到 ${Math.floor(Math.random()*5)+1} 条相关记忆`;
+
+            const toolEnd = document.createElement('div');
+            toolEnd.className = 'log-entry';
+            toolEnd.innerHTML = `
+              <span class="log-time">[${time2}]</span>
+              <span class="log-phase">Tool Result</span>
+              <span class="log-detail"><span class="log-tool">${tool}</span>() → <span class="log-result">${result}</span></span>
+            `;
+            logArea.appendChild(toolEnd);
+            logArea.scrollTop = logArea.scrollHeight;
+          }, 1000 + Math.random() * 1500);
+        }, tDelay);
+        tDelay += 2000;
+      }
+    }
+
+    // 回车提交
+    document.getElementById('userInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') runDemo();
     });
 
     // 页面加载后自动高亮第一步
