@@ -40,6 +40,14 @@
     "dingtalk-docs": {
       "version": "0.3.4",
       "installedAt": 1773386838713
+    },
+    "self-improving": {
+      "version": "1.2.16",
+      "installedAt": 1773746648828
+    },
+    "ontology": {
+      "version": "1.0.4",
+      "installedAt": 1773746652054
     }
   }
 }
