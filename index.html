@@ -398,6 +398,624 @@
       .card li { font-size: 0.85rem; padding: 6px 0; }
     }
 
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>OpenClaw Prompt 构成可视化</h1>
+      <p class="subtitle">基于官方文档的完整 LLM 调用 Prompt 组装流程</p>
+    </header>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color context"></div>
+        <span>上下文组件</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color tool"></div>
+        <span>工具定义</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color skill"></div>
+        <span>技能指令</span>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <h2 style="text-align: center; margin-bottom: 25px; color: #fff;">Prompt 组装流程图</h2>
+      <div class="flow" id="flow">
+        <div class="flow-step" data-step="1">
+          <h3>1. Inbound Message</h3>
+          <p>用户输入到达</p>
+        </div>
+        <div class="arrow"></div>
+        <div class="flow-step" data-step="2">
+          <h3>2. Session Resolution</h3>
+          <p>识别会话 + 设备</p>
+        </div>
+        <div class="arrow"></div>
+        <div class="flow-step" data-step="3">
+          <h3>3. Bootstrap Load</h3>
+          <p>加载引导文件</p>
+        </div>
+        <div class="arrow"></div>
+        <div class="flow-step" data-step="4">
+          <h3>4. System Prompt</h3>
+          <p>构建系统提示</p>
+        </div>
+        <div class="arrow"></div>
+        <div class="flow-step" data-step="5">
+          <h3>5. Model Call</h3>
+          <p>LLM 推理</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="interactive-demo">
+      <h2 class="demo-title">🔍 交互式演示：观察 OpenClaw 如何处理你的消息</h2>
+      <div class="input-group">
+        <input type="text" id="userInput" placeholder="输入你想让 OpenClaw 处理的消息（例如：'查看当前时间'、'读取 AGENTS.md 内容'）" />
+        <button id="submitBtn" onclick="runDemo()">开始执行</button>
+      </div>
+      <div class="log-area" id="logArea">
+        <div class="log-entry">
+          <span class="log-time">[等待]</span>
+          <span class="log-phase">系统</span>
+          <span class="log-detail">在上方输入框输入消息，点击"开始执行"观察完整处理流程。</span>
+        </div>
+      </div>
+    </div>
+
+      <div class="card" id="card-bootstrap">
+        <h2><span class="icon">📂</span> Bootstrap 引导文件注入</h2>
+        <ul>
+          <li><span class="bullet">•</span> AGENTS.md - 代理配置规则</li>
+          <li><span class="bullet">•</span> SOUL.md - AI 人格与核心真相</li>
+          <li><span class="bullet">•</span> TOOLS.md - 工具能力矩阵</li>
+          <li><span class="bullet">•</span> IDENTITY.md - 身份信息</li>
+          <li><span class="bullet">•</span> USER.md - 用户画像</li>
+          <li><span class="bullet">•</span> HEARTBEAT.md - 心跳任务</li>
+          <li><span class="bullet">•</span> BOOTSTRAP.md - 首次运行脚本</li>
+          <li><span class="bullet">•</span> MEMORY.md - 长期记忆（如存在）</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleDetail('detail-bootstrap')">查看注入示例</button>
+        <div class="detail-view" id="detail-bootstrap">
+          <h3>Project Context 注入片段</h3>
+          <pre>
+<span class="code-comment"># 自动注入到系统提示中的引导内容（截断后）</span>
+<span class="code-key">## Workspace Files (injected)</span>
+
+<span class="code-key">---</span>
+<span class="code-string">AGENTS.md</span>
+<span class="code-comment"># 此文件夹是家。把它当作家来对待。</span>
+...
+
+<span class="code-string">SOUL.md</span>
+<span class="code-comment"># 你是谁</span>
+<span class="code-key">Core Truths</span>
+- 真正提供帮助，而不是表演式帮助
+- 有自己的观点
+- 先尝试解决问题再提问
+...
+
+<span class="code-key">Total bootstrap chars</span>: 45,231 / 150,000 (max)
+          </pre>
+        </div>
+      </div>
+
+      <div class="card" id="card-system">
+        <h2><span class="-icon">⚙️</span> System Prompt 结构 <span class="mode-badge">promptMode</span></h2>
+        <ul>
+          <li><span class="bullet">•</span> <strong>Tooling</strong> - 当前工具列表 + 简短描述</li>
+          <li><span class="bullet">•</span> <strong>Safety</strong> - 安全护栏提醒</li>
+          <li><span class="bullet">•</span> <strong>Skills</strong> - 可用技能元数据（按需加载）</li>
+          <li><span class="bullet">•</span> <strong>Workspace</strong> - 工作目录路径</li>
+          <li><span class="bullet">•</span> <strong>Documentation</strong> - 本地文档路径</li>
+          <li><span class="bullet">•</span> <strong>Sandbox</strong> - 沙箱环境信息（如启用）</li>
+          <li><span class="bullet">•</span> <strong>Current Date & Time</strong> - 时区与时间格式</li>
+          <li><span class="bullet">•</span> <strong>Runtime</strong> - 主机、OS、Node、模型、思考级别</li>
+          <li><span class="bullet">•</span> <strong>Reasoning</strong> - 推理可见性控制</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleDetail('detail-modes')">查看 Prompt Modes</button>
+        <div class="detail-view" id="detail-modes">
+          <h3>三种 Prompt Mode</h3>
+          <pre>
+Mode: <span class="code-string">full</span> (默认)
+  - 包含所有章节
+  - 主会话使用
+  - 完整上下文：技能、内存、自更新、回复标签、心跳等
+
+Mode: <span class="code-string">minimal</span> (子代理)
+  - 省略：Skills、Memory Recall、Self-Update、Model Aliases、User Identity、Reply Tags、Messaging、Silent Replies、Heartbeats
+  - 保留：Tooling、Safety、Workspace、Sandbox、Date/Time、Runtime、注入的上下文
+
+Mode: <span class="code-string">none</span>
+  - 仅返回基础身份行
+  - 用于极简场景
+          </pre>
+        </div>
+      </div>
+
+      <div class="card" id="card-tools">
+        <h2><span class="icon">🔧</span> 工具定义与成本</h2>
+        <ul>
+          <li><span class="bullet">•</span> <strong>Tool List Text</strong> - 系统提示中的人类可读描述</li>
+          <li><span class="bullet">•</span> <strong>Tool Schemas (JSON)</strong> - 发送给模型的 JSON Schema</li>
+          <li><span class="bullet">⚠️</strong> Schema 计入上下文，即使不可见</li>
+          <li><span class="bullet">•</span> 每个工具都有独立的 schema 开销</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleDetail('detail-tools')">查看上下文分析示例</button>
+        <div class="detail-view" id="detail-tools">
+          <h3>/context detail 输出示例</h3>
+          <pre>
+🧠 Context breakdown (detailed)
+...
+Top tools (schema size):
+- <span class="code-key">exec</span>: 6,240 chars (~1,560 tok)
+- <span class="code-key">browser</span>: 9,812 chars (~2,453 tok)
+- <span class="code-key">read</span>: 4,102 chars (~1,026 tok)
+...
+
+Tool schemas (JSON): 31,988 chars (~7,997 tok)
+  (计入上下文窗口，不在文本中显示)
+          </pre>
+        </div>
+      </div>
+
+      <div class="card" id="card-context">
+        <h2><span class="icon">📊</span> Context 上下文窗口管理</h2>
+        <ul>
+          <li><span class="bullet">•</span> <strong>系统提示</strong> (OpenClaw 构建)</li>
+          <li><span class="bullet">•</span> <strong>会话历史</strong> (用户消息 + 助手回复)</li>
+          <li><span class="bullet">•</span> <strong>工具调用/结果</strong> + 附件</li>
+          <li><span class="bullet">•</span> <strong>Compaction summaries</strong> - 压缩摘要</li>
+          <li><span class="bullet">•</span> <strong>Pruning artifacts</strong> - 剪枝标记</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleDetail('detail-context')">查看 /context 示例</button>
+        <div class="detail-view" id="detail-context">
+          <h3>/context list 输出</h3>
+          <pre>
+🧠 Context breakdown
+Workspace: /root/.openclaw/workspace
+Bootstrap max/file: 20,000 chars
+System prompt (run): 38,412 chars (~9,603 tok)
+
+Injected workspace files:
+- AGENTS.md: OK | raw 1,742 chars (~436 tok)
+- SOUL.md: OK | raw 912 chars (~228 tok)
+- TOOLS.md: TRUNCATED | raw 54,210 → injected 20,962
+- IDENTITY.md: OK | raw 211 chars (~53 tok)
+- USER.md: OK | raw 388 chars (~97 tok)
+
+Skills list (system prompt text): 2,184 chars (~546 tok)
+Tools: read, edit, write, exec, process, browser, …
+Tool schemas (JSON): 31,988 chars (~7,997 tok)
+          </pre>
+        </div>
+      </div>
+
+      <div class="card" id="card-compaction">
+        <h2><span class="icon">🔄</span> 自动 Compaction 机制</h2>
+        <ul>
+          <li><span class="bullet">•</span> 当会话接近或超出上下文窗口时自动触发</li>
+          <li><span class="bullet">•</span> 将较旧对话 <strong>总结</strong> 为紧凑条目</li>
+          <li><span class="bullet">•</span> 保留近期消息不变</li>
+          <li><span class="bullet">•</span> 摘要持久化到 JSONL 历史</li>
+          <li><span class="bullet">•</span> 可配置目标令牌数、压缩模型等</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleDetail('detail-compaction')">查看压缩配置</button>
+        <div class="detail-view" id="detail-compaction">
+          <h3>openclaw.json 配置示例</h3>
+          <pre>
+{
+  "agents": {
+    "defaults": {
+      "compaction": {
+        "mode": "auto",
+        "targetTokens": 8000,
+        "model": "openrouter/anthropic/claude-sonnet-4-5",
+        "identifierPolicy": "strict"
+      }
+    }
+  }
+}
+          </pre>
+        </div>
+      </div>
+
+      <div class="card" id="card-pruning">
+        <h2><span class="icon">✂️</span> Session Pruning 会话剪枝</h2>
+        <ul>
+          <li><span class="bullet">•</span> <strong>仅影响内存</strong>：每次 LLM 调用前临时修剪</li>
+          <li><span class="bullet">•</span> <strong>不修改</strong> 磁盘上的 JSONL 历史</li>
+          <li><span class="bullet">•</span> 目标：减少 Anthropic 缓存失效</li>
+          <li><span class="bullet">•</span> 修剪对象：旧的 toolResult 消息</li>
+          <li><span class="bullet">•</span> 保护：用户/助手消息、含图片的结果</li>
+          <li><span class="bullet">•</span> 模式：<code>cache-ttl</code>（基于 TTL 自动触发）</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleDetail('detail-pruning')">查看 Pruning 细节</button>
+        <div class="detail-view" id="detail-pruning">
+          <h3>Soft-trim vs Hard-clear</h3>
+          <pre>
+Soft-trim:
+  - 对过大的 toolResult 仅保留头尾
+  - 插入 "..." 并标注原始大小
+  - 跳过含图片的结果
+
+Hard-clear:
+  - 完全替换为 "[Old tool result content cleared]"
+  - 当工具结果超过 hardClearRatio 阈值时触发
+
+默认配置:
+  ttl: "5m"
+  keepLastAssistants: 3
+  softTrimRatio: 0.3
+  hardClearRatio: 0.5
+          </pre>
+        </div>
+      </div>
+
+      <div class="card" id="card-hooks">
+        <h2><span class="icon">🪝</span> Hook 拦截点</h2>
+        <ul>
+          <li><span class="bullet">•</span> <code>agent:bootstrap</code> - 修改注入文件</li>
+          <li><span class="bullet">•</span> <code>before_prompt_build</code> - 注入动态上下文</li>
+          <li><span class="bullet">•</span> <code>before_model_resolve</code> - 覆盖模型选择</li>
+          <li><span class="bullet">•</span> <code>before_tool_call</code> / <code>after_tool_call</code> - 拦截工具</li>
+          <li><span class="bullet">•</span> <code>before_compaction</code> / <code>after_compaction</code> - 压缩钩子</li>
+          <li><span class="bullet">•</span> <code>agent_end</code> - 检查运行元数据</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleDetail('detail-hooks')">Hook 使用示例</button>
+        <div class="detail-view" id="detail-hooks">
+          <h3>Plugin Hook 注册</h3>
+          <pre>
+module.exports = {
+  hooks: {
+    beforePromptBuild: async (ctx) => {
+      // 在系统提示前注入自定义文本
+      ctx.prependSystemContext = {
+        text: "当前环境: production v2.1"
+      };
+    },
+
+    beforeCompaction: async (ctx) => {
+      // 记录压缩事件
+      console.log(`Compacting ${ctx.sessionId}`);
+    }
+  }
+};
+          </pre>
+        </div>
+      </div>
+
+      <div class="card" id="card-streaming">
+        <h2><span class="icon">🌊</span> Streaming 流式输出</h2>
+        <ul>
+          <li><span class="bullet">•</span> Block streaming - 分块发送部分回复</li>
+          <li><span class="bullet">•</span> 配置：<code>blockStreamingDefault</code>、<code>blockStreamingChunk</code></li>
+          <li><span class="bullet">•</span> 触发点：<code>text_end</code> 或 <code>message_end</code></li>
+          <li><span class="bullet">•</span> 支持推理流（reasoning）单独输出</li>
+          <li><span class="bullet">•</span> Human delay - 模拟人类输入节奏</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleDetail('detail-stream')">查看流式配置</button>
+        <div class="detail-view" id="detail-stream">
+          <h3>openclaw.json 流式设置</h3>
+          <pre>
+{
+  "agents": {
+    "defaults": {
+      "blockStreamingDefault": true,
+      "blockStreamingBreak": "text_end",
+      "blockStreamingChunk": {
+        "minChars": 50,
+        "maxChars": 500
+      },
+      "humanDelay": 800
+    }
+  }
+}
+          </pre>
+        </div>
+      </div>
+
+      <div class="card" id="card-queue">
+        <h2><span class="icon">📥</span> 消息队列 Queueing</h2>
+        <ul>
+          <li><span class="bullet">•</span> <strong>interrupt</strong> - 中断当前运行</li>
+          <li><span class="bullet">•</span> <strong>steer</strong> - 引导到当前运行</li>
+          <li><span class="bullet">•</span> <strong>followup</strong> - 排队等待下一轮</li>
+          <li><span class="bullet">•</span> <strong>collect</strong> - 收集批次后执行</li>
+          <li><span class="bullet">•</span> 会话串行化：同一会话同时仅一个运行</li>
+          <li><span class="bullet">•</span> 全局排队：可选的全局串行化</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleDetail('detail-queue')">队列配置示例</button>
+        <div class="detail-view" id="detail-queue">
+          <h3>按渠道配置队列模式</h3>
+          <pre>
+{
+  "messages": {
+    "queue": {
+      "default": "followup",
+      "byChannel": {
+        "whatsapp": "interrupt",
+        "telegram": "steer",
+        "discord": "collect"
+      }
+    }
+  }
+}
+          </pre>
+        </div>
+      </div>
+
+      <div class="card" id="card-session">
+        <h2><span class="icon">🔗</span> Session 会话管理</h2>
+        <ul>
+          <li><span class="bullet">•</span> 直接聊天 → <code>main</code> 会话</li>
+          <li><span class="bullet">•</span> 群组/频道 → 独立会话键</li>
+          <li><span class="bullet">•</span> 会话持久化在网关的 JSONL 文件中</li>
+          <li><span class="bullet">•</span> 多设备可映射到同一会话，但历史不完全同步</li>
+          <li><span class="bullet">•</span> Control UI/TUI 显示网关端的真实转录</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleDetail('detail-session')">会话命令</button>
+        <div class="detail-view" id="detail-session">
+          <h3>会话控制命令</h3>
+          <pre>
+/new       - 创建新会话（新 session id）
+/reset     - 清空当前会话历史
+/status    - 查看会话状态、上下文使用、成本
+/context   - 上下文详情（注入文件、工具开销）
+/compact   - 手动触发压缩总结
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="diagram" style="margin-top: 40px;">
+      <h2 style="text-align: center; margin-bottom: 25px; color: #fff;">完整数据流</h2>
+      <div class="flow" style="flex-direction: column; gap: 15px;">
+        <div class="flow-step" style="width: 100%; max-width: 400px; align-self: center;" data-step="a">
+          <h3>Inbound Message</h3>
+          <p>用户消息通过 WhatsApp/Telegram/Discord 等渠道到达网关 → 路由到对应 sessionKey</p>
+        </div>
+        <div class="arrow" style="width: 3px; height: 30px; min-width: 0;"></div>
+        <div class="flow-step" style="width: 100%; max-width: 400px; align-self: center;" data-step="b">
+          <h3>Context Assembly</h3>
+          <p>1. 加载 bootstrap 文件<br>2. 构建 system prompt (tooling + skills + runtime)<br>3. 合并会话历史 + 工具结果<br>4. 应用 compaction/pruning</p>
+        </div>
+        <div class="arrow" style="width: 3px; height: 30px; min-width: 0;"></div>
+        <div class="flow-step" style="width: 100%; max-width: 400px; align-self: center;" data-step="c">
+          <h3>LLM Call</h3>
+          <p>发送完整提示到模型 → 流式返回助手 deltas → 检测工具调用</p>
+        </div>
+        <div class="arrow" style="width: 3px; height: 30px; min-width: 0;"></div>
+        <div class="flow-step" style="width: 100%; max-width: 400px; align-self: center;" data-step="d">
+          <h3>Tool Execution</h3>
+          <p>执行工具（read/exec/browser 等） → 结果注入会话历史 → 继续流式输出</p>
+        </div>
+        <div class="arrow" style="width: 3px; height: 30px; min-width: 0;"></div>
+        <div class="flow-step" style="width: 100%; max-width: 400px; align-self: center;" data-step="e">
+          <h3>Response & Persistence</h3>
+          <p>最终回复发送到用户渠道 → 完整运行元数据保存 → 上下文供下次使用</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 40px;">
+      <h2><span class="icon">💡</span> 关键要点</h2>
+      <ul>
+        <li><span class="bullet">•</span> OpenClaw 拥有自己的 <strong>系统提示构建系统</strong>，不使用 pi-agent 默认提示</li>
+        <li><span class="bullet">•</span> 引导文件 <strong>自动注入</strong> 到系统提示，消耗上下文窗口</li>
+        <li><span class="bullet">•</span> 工具列表（文本）+ <strong>工具 schemas（JSON）</strong> 双重开销</li>
+        <li><span class="bullet">•</span> Skills 仅注入元数据，<strong>按需读取</strong> SKILL.md</li>
+        <li><span class="bullet">•</span> <strong>Compaction</strong> 持久化压缩历史；<strong>Pruning</strong> 临时修剪内存（仅针对 Anthropic 缓存）</li>
+        <li><span class="bullet">•</span> 使用 <code>/context</code>、<code>/status</code>、<code>/compact</code> 管理上下文窗口</li>
+        <li><span class="bullet">•</span> hook 系统允许在 <strong>提示构建前</strong> 或 <strong>工具调用前后</strong> 拦截修改</li>
+      </ul>
+    </div>
+
+    <footer>
+      <p>本可视化基于 OpenClaw 官方文档构建 | 文档来源: <a href="https://docs.openclaw.ai" target="_blank">docs.openclaw.ai</a></p>
+      <p style="margin-top: 10px; font-size: 0.85rem; color: #555;">OpenClaw 版本: v0.x | 生成时间: 2026-03-17</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleDetail(id) {
+      const el = document.getElementById(id);
+      const isVisible = el.classList.contains('show');
+      el.classList.toggle('show', !isVisible);
+    }
+
+    // 交互：点击流程图步骤高亮关联卡片
+    document.querySelectorAll('.flow-step').forEach(step => {
+      step.addEventListener('click', function() {
+        const stepNum = this.dataset.step;
+        document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('active', 'highlight'));
+        document.querySelectorAll('.card').forEach(c => c.style.borderColor = '');
+
+        this.classList.add('active', 'highlight');
+
+        const cardMap = {
+          '1': 'card-bootstrap',
+          '2': 'card-session',
+          '3': 'card-bootstrap',
+          '4': 'card-system',
+          '5': 'card-queue'
+        };
+        if (cardMap[stepNum]) {
+          const card = document.getElementById(cardMap[stepNum]);
+          if (card) {
+            card.style.borderColor = '#00d4ff';
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+    });
+
+    // 模拟演示逻辑
+    const phaseDescriptions = [
+      {
+        name: "Inbound Message",
+        detail: (input) => `接收用户消息: "${input}" → 路由到 sessionKey="main"`
+      },
+      {
+        name: "Session Resolution",
+        detail: (input) => `验证设备身份 → 加载会话历史（最近 ${Math.floor(Math.random()*10)+5} 条消息）`
+      },
+      {
+        name: "Bootstrap Load",
+        detail: (input) => `注入引导文件 #count=8: AGENTS.md, SOUL.md, TOOLS.md, IDENTITY.md, USER.md, HEARTBEAT.md, BOOTSTRAP.md, MEMORY.md`
+      },
+      {
+        name: "System Prompt Build",
+        detail: (input) => `组装 Prompt:
+  • Tooling: ${Math.floor(Math.random()*15)+10} 个工具
+  • Skills: ${Math.floor(Math.random()*3)+1} 个技能元数据
+  • Bootstrap: ${(Math.random()*50000+30000).toFixed(0)} 字符
+  • Total: ~${(Math.random()*20000+30000).toFixed(0)} tok`
+      },
+      {
+        name: "Model Call",
+        detail: (input) => `发送到 LLM (openrouter/stepfun/step-3.5-flash:free) → 流式推理中...`
+      }
+    ];
+
+    async function runDemo() {
+      const input = document.getElementById('userInput').value.trim();
+      const btn = document.getElementById('submitBtn');
+      const logArea = document.getElementById('logArea');
+
+      if (!input) {
+        alert('请输入消息');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = '执行中...';
+      logArea.innerHTML = '';
+
+      // 重置流程步骤状态
+      document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('completed', 'active'));
+      document.querySelectorAll('.arrow').forEach(a => a.classList.remove('animated'));
+
+      let delay = 0;
+
+      for (let i = 1; i <= phaseDescriptions.length; i++) {
+        setTimeout(() => {
+          // 更新流程动画
+          const stepEl = document.querySelector(`.flow-step[data-step="${i}"]`);
+          const prevStep = document.querySelector(`.flow-step[data-step="${i-1}"]`);
+          const arrow = document.querySelectorAll('.arrow')[i-1];
+
+          if (prevStep) prevStep.classList.add('completed');
+          stepEl.classList.add('active');
+          if (arrow) arrow.classList.add('animated');
+
+          // 添加日志
+          const time = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+          const phase = phaseDescriptions[i-1].name;
+          const detail = phaseDescriptions[i-1].detail(input);
+
+          const logEntry = document.createElement('div');
+          logEntry.className = 'log-entry';
+          logEntry.innerHTML = `
+            <span class="log-time">[${time}]</span>
+            <span class="log-phase">${phase}</span>
+            <span class="log-detail">${detail}</span>
+          `;
+          logArea.appendChild(logEntry);
+          logArea.scrollTop = logArea.scrollHeight;
+
+          // 模拟工具调用（随机）
+          if (i === phaseDescriptions.length) {
+            setTimeout(() => {
+              simulateToolCalls(logArea);
+            }, 1000);
+          }
+
+          // 完成最后一个步骤
+          if (i === phaseDescriptions.length) {
+            setTimeout(() => {
+              stepEl.classList.remove('active');
+              stepEl.classList.add('completed');
+              const finalArrow = document.querySelectorAll('.arrow')[i-1];
+              if (finalArrow) finalArrow.classList.add('animated');
+
+              const time2 = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+              const finalLog = document.createElement('div');
+              finalLog.className = 'log-entry';
+              finalLog.innerHTML = `
+                <span class="log-time">[${time2}]</span>
+                <span class="log-phase">Response</span>
+                <span class="log-detail">✅ 处理完成！回复已发送给用户。</span>
+              `;
+              logArea.appendChild(finalLog);
+              logArea.scrollTop = logArea.scrollHeight;
+
+              btn.disabled = false;
+              btn.textContent = '开始执行';
+            }, 2000);
+          }
+        }, delay);
+        delay += 1500;
+      }
+    }
+
+    function simulateToolCalls(logArea) {
+      const tools = ['read', 'exec', 'session_status', 'memory_search'];
+      const toolCount = Math.floor(Math.random() * 3) + 1;
+      let tDelay = 0;
+
+      for (let t = 0; t < toolCount; t++) {
+        setTimeout(() => {
+          const tool = tools[Math.floor(Math.random() * tools.length)];
+          const time = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+
+          const toolStart = document.createElement('div');
+          toolStart.className = 'log-entry';
+          toolStart.innerHTML = `
+            <span class="log-time">[${time}]</span>
+            <span class="log-phase">Tool Call</span>
+            <span class="log-detail"><span class="log-tool">${tool}</span>() 执行中...</span>
+          `;
+          logArea.appendChild(toolStart);
+          logArea.scrollTop = logArea.scrollHeight;
+
+          setTimeout(() => {
+            const time2 = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+            const result = tool === 'read' ? `文件内容已读取 (${(Math.random()*5000+500).toFixed(0)} 字符)` :
+                          tool === 'exec' ? `命令执行完成，退出码 0` :
+                          tool === 'session_status' ? `会话状态: 上下文 ${(Math.random()*30+10).toFixed(1)}/32K tok` :
+                          `找到 ${Math.floor(Math.random()*5)+1} 条相关记忆`;
+
+            const toolEnd = document.createElement('div');
+            toolEnd.className = 'log-entry';
+            toolEnd.innerHTML = `
+              <span class="log-time">[${time2}]</span>
+              <span class="log-phase">Tool Result</span>
+              <span class="log-detail"><span class="log-tool">${tool}</span>() → <span class="log-result">${result}</span></span>
+            `;
+            logArea.appendChild(toolEnd);
+            logArea.scrollTop = logArea.scrollHeight;
+          }, 1000 + Math.random() * 1500);
+        }, tDelay);
+        tDelay += 2000;
+      }
+    }
+
+    // 回车提交
+    document.getElementById('userInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') runDemo();
+    });
+
+    // 页面加载后自动高亮第一步
+    window.addEventListener('DOMContentLoaded', () => {
+      const firstStep = document.querySelector('.flow-step[data-step="1"]');
+      if (firstStep) firstStep.click();
+    });
+  </script>
 
     <script>
       function toggleDetail(id) {
@@ -406,7 +1024,6 @@
         el.classList.toggle('show', !isVisible);
       }
 
-      // 交互：点击流程图步骤高亮关联卡片
       document.querySelectorAll('.flow-step').forEach(step => {
         step.addEventListener('click', function() {
           const stepNum = this.dataset.step;
@@ -432,7 +1049,6 @@
         });
       });
 
-      // 模拟演示逻辑 - 真实细节
       const phaseDescriptions = [
         {
           name: "Inbound Message",
@@ -475,7 +1091,8 @@
             const skills = ["dingtalk-docs", "dingtalk-ai-table", "feishu-docs", "summarize"].slice(0, Math.floor(Math.random()*3)+2);
             const contextTokens = (32000 + Math.random()*8000).toFixed(0);
             const availableContext = (128000 - parseFloat(contextTokens)).toFixed(0);
-            return `promptMode=full | 组装系统提示:\n  • Tooling: ${toolCount} 个工具 (read, exec, browser, process, ...)\n  • Skills: ${skills.length} 个技能元数据 (按需加载)\n  • Safety: 已注入护栏提醒\n  • Runtime: host=racknerd-c83d2ec | model=${getRandomModel()}\n  • Bootstrap: 已截断/合并\n  • Context: ~${contextTokens} tok 已使用 | 剩余 ${availableContext} tok`;
+            const model = getRandomModel();
+            return `promptMode=full | 组装系统提示:\n  • Tooling: ${toolCount} 个工具 (read, exec, browser, process, ...)\n  • Skills: ${skills.length} 个技能元数据 (按需加载)\n  • Safety: 已注入护栏提醒\n  • Runtime: host=racknerd-c83d2ec | model=${model}\n  • Bootstrap: 已截断/合并\n  • Context: ~${contextTokens} tok 已使用 | 剩余 ${availableContext} tok`;
           }
         },
         {
@@ -617,9 +1234,7 @@
       document.getElementById('userInput').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') runDemo();
       });
-
-      window.addEventListener('DOMContentLoaded', () => {
-        const firstStep = document.querySelector('.flow-step[data-step="1"]');
-        if (firstStep) firstStep.click();
-      });
     </script>
+
+</body>
+</html>
