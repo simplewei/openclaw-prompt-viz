@@ -348,6 +348,56 @@
       margin-left: 10px;
     }
   </style>
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+      body { padding: 10px; }
+      .container { max-width: 100%; }
+      h1 { font-size: 1.8rem; }
+      .subtitle { font-size: 0.95rem; }
+      .legend { gap: 15px; }
+      .legend-item { font-size: 0.8rem; }
+      .flow { flex-direction: column; gap: 15px; }
+      .arrow {
+        width: 3px; height: 25px; min-width: 0; align-self: center;
+      }
+      .arrow::after { content: '↓'; right: -8px; top: -10px; }
+      .flow-step {
+        width: 100%; max-width: 280px; padding: 15px;
+      }
+      .flow-step h3 { font-size: 0.9rem; }
+      .flow-step p { font-size: 0.8rem; }
+      .sections { grid-template-columns: 1fr; }
+      .card { padding: 20px; }
+      .card h2 { font-size: 1.1rem; }
+      .card ul { font-size: 0.9rem; }
+      .interactive-demo { padding: 20px; }
+      .demo-title { font-size: 1.2rem; }
+      .input-group { flex-direction: column; }
+      .input-group input { min-width: 100%; }
+      .input-group button { width: 100%; }
+      .log-area {
+        font-size: 0.85rem; padding: 15px; max-height: 400px;
+      }
+      .log-entry {
+        flex-direction: column; gap: 4px; align-items: flex-start;
+      }
+      .log-time, .log-phase { min-width: auto; font-size: 0.8rem; }
+      .log-phase { font-size: 0.9rem; }
+      .detail-view { padding: 15px; }
+      .detail-view h3 { font-size: 1rem; }
+      .detail-view pre { font-size: 0.8rem; padding: 10px; }
+      .toggle-btn { width: 100%; padding: 12px; }
+      footer { font-size: 0.8rem; padding: 15px; }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem; }
+      .flow-step { padding: 12px; }
+      .flow-step h3 { font-size: 0.85rem; }
+      .flow-step p { font-size: 0.75rem; }
+      .card h2 { font-size: 1rem; }
+      .card li { font-size: 0.85rem; padding: 6px 0; }
+    }
 </head>
 <body>
   <div class="container">
