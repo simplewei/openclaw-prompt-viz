@@ -143,6 +143,32 @@ When user asks for something, pick tool by this priority:
 - 默认：`claude --permission-mode bypassPermissions --print '你的任务'`
 - 如果项目复杂，用 background + pty 模式
 
+## 🔧 上游错误排查规范（强制执行）
+
+当遇到 "Provider returned error" 或任何上游接口错误时，**必须**按以下步骤排查并结构化输出，不得只返回通用失败信息：
+
+### 排查步骤
+
+1. **判断错误来源**：认证失败 / 权限不足 / 模型不存在 / 限流 / 余额不足 / 网络错误 / 超时 / 参数非法 / 服务端故障
+2. **提取错误上下文**：
+   - provider 名称、model 名称、base URL
+   - HTTP 状态码
+   - provider 返回的原始错误消息
+   - request id / trace id
+3. **检查配置问题**：API key 是否存在、base URL 格式、model 名称拼写、必填参数
+4. **检查请求问题**：输入是否过长、不支持的参数、超出上下文长度
+5. **检查运行环境**：网络可达性、provider 服务状态、本地服务状态
+
+### 输出格式（必须遵守）
+
+```
+- 错误分类：[具体分类]
+- 已知信息：[所有可见的错误上下文]
+- 可能原因：[按可能性排序]
+- 建议操作：[给出下一步可执行操作]
+- 仍需补充的信息：[如缺少日志，提示用户获取方法]
+```
+
 ## Self-Audit Questions (Before Replying)
 
 1. **需求分析**：用户真的需要浏览器吗？还是静态 API 就能搞定？
