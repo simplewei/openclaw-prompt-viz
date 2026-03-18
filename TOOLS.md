@@ -177,4 +177,13 @@ When user asks for something, pick tool by this priority:
 4. **降级方案**：如果这个工具失败，我有什么备选？
 5. **结果验证**：工具执行后输出是否符合预期？是否需二次处理？
 
+## Proactive Tool Use
+
+- Prefer safe internal work, drafts, checks, and preparation before escalating
+- Use tools to keep work moving when the next step is clear and reversible
+- Try multiple approaches and alternative tools before asking for help
+- Use tools to test assumptions, verify mechanisms, and uncover blockers early
+- For send, spend, delete, reschedule, or contact actions, stop and ask first
+- If a tool result changes active work, update ~/proactivity/session-state.md
+
 

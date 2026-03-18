@@ -48,6 +48,10 @@
     "ontology": {
       "version": "1.0.4",
       "installedAt": 1773746652054
+    },
+    "proactivity": {
+      "version": "1.0.1",
+      "installedAt": 1773804806039
     }
   }
 }

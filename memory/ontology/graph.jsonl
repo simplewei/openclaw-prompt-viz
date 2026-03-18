@@ -1,0 +1,3 @@
+{"op":"create","entity":{"id":"example_person","type":"Person","properties":{"name":"Example User"}}}
+{"op":"create","entity":{"id":"example_project","type":"Project","properties":{"name":"Example Project","status":"active"}}}
+{"op":"relate","from":"example_project","rel":"has_owner","to":"example_person"}
