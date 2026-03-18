@@ -1,41 +1,45 @@
 #!/usr/bin/env node
 /**
- * AI助手业务自动化 - 收入统计与到期提醒
- * 
- * 功能：
- * 1. 每日从订单表统计收入，更新收入统计表
- * 2. 查找3天内到期的订单，生成提醒
- * 3. 自动发送钉钉通知（需配置钉钉机器人）
+ * AI助手业务自动化 - 收入统计与到期提醒 (本地过滤版)
  */
 
 const { exec } = require('child_process');
-const fs = require('fs');
-const path = require('path');
 
-// 配置
 const CONFIG = {
-  // CRM Base ID
   BASE_ID: 'G53mjyd80pq9kDovCld6RKan86zbX04v',
-  // 表ID
   TABLES: {
-    orders: 'GPPInsK',      // 订单表
-    stats: 'rLs7pGI',       // 收入统计
-    customers: 'YoSJP1q'    // 客户表
+    orders: 'GPPInsK',
+    stats: 'rLs7pGI',
+    customers: 'YoSJP1q'
   },
-  // 钉钉机器人Webhook（可选）
   DINGTALK_WEBHOOK: process.env.DINGTALK_WEBHOOK || '',
-  // 工作区路径
   WORKSPACE: process.env.OPENCLAW_WORKSPACE || '/root/.openclaw/workspace'
 };
 
-// 工具函数：执行mcporter命令
-function mcporterCall(method, args) {
+// 字段ID映射
+const FIELD = {
+  orders: {
+    amount: 'paWPW0p',
+    packageName: 'QEb9FaU',
+    purchaseDate: 'ZETRGXm',
+    expireDate: '9HWmHGX',
+    status: '2m1xVEp'
+  }
+};
+
+function mcporterCall(method, params = []) {
   return new Promise((resolve, reject) => {
-    const argsJson = JSON.stringify(args);
-    const cmd = `mcporter call dingtalk-ai-table ${method} --args '${argsJson}' --output json`;
+    const paramStr = params.map(p => {
+      if (typeof p === 'object') {
+        return Object.entries(p).map(([k, v]) => `${k}='${v}'`).join(' ');
+      }
+      return p;
+    }).join(' ');
+    
+    const cmd = `mcporter call dingtalk-ai-table ${method} ${paramStr} --output json`;
     exec(cmd, (error, stdout, stderr) => {
       if (error) {
-        reject(new Error(`mcporter error: ${stderr || error.message}`));
+        reject(new Error(`mcporter error: ${stderr || error.message}\nCommand: ${cmd}`));
         return;
       }
       try {
@@ -48,40 +52,71 @@ function mcporterCall(method, args) {
   });
 }
 
-// 1. 统计今日收入（最近7天内的订单）
+function parseDate(dateStr) {
+  // 处理 "2026-03-14T16:00:00Z" 格式
+  return new Date(dateStr);
+}
+
+function isAfter(date, compareStr) {
+  const d = parseDate(date);
+  const c = new Date(compareStr + 'T00:00:00Z');
+  return d > c;
+}
+
+function isBeforeOrEqual(date, compareStr) {
+  const d = parseDate(date);
+  const c = new Date(compareStr + 'T00:00:00Z');
+  return d <= c;
+}
+
+function isStatusCompleted(statusObj) {
+  return statusObj?.name === '已完成';
+}
+
 async function calculateStats() {
   const today = new Date().toISOString().split('T')[0];
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
   
-  console.log(`查询 ${sevenDaysAgo} 至 ${today} 的订单...`);
+  console.log(`查询所有订单，本地筛选 ${sevenDaysAgo} 至 ${today} 的已完成订单...`);
   
-  // 查询最近的订单
-  const result = await mcporterCall('query_records', {
-    baseId: CONFIG.BASE_ID,
-    tableId: CONFIG.TABLES.orders,
-    filter: {
-      formula: `AND(IS_AFTER(购买时间, "${sevenDaysAgo}"), IS_BEFORE_OR_EQUAL(购买时间, "${today}"), 订单状态="已完成")`
-    },
-    limit: 1000
-  });
+  const result = await mcporterCall('query_records', [
+    `baseId=${CONFIG.BASE_ID}`,
+    `tableId=${CONFIG.TABLES.orders}`,
+    'limit=1000'
+  ]);
+  
+  console.log('Raw result:', JSON.stringify(result).substring(0, 500));
   
   if (!result.data || !result.data.records) {
     console.log('没有找到订单记录');
     return;
   }
   
-  const records = result.data.records;
-  console.log(`找到 ${records.length} 个订单`);
+  const allRecords = result.data.records;
+  console.log(`总订单数: ${allRecords.length}`);
   
-  // 统计
+  // 本地筛选
+  const filtered = allRecords.filter(record => {
+    const cells = record.cells;
+    const purchaseDate = cells[FIELD.orders.purchaseDate]?.value;
+    const status = cells[FIELD.orders.status];
+    
+    if (!purchaseDate || !status) return false;
+    if (status.name !== '已完成') return false;
+    
+    return isAfter(purchaseDate, sevenDaysAgo) && isBeforeOrEqual(purchaseDate, today);
+  });
+  
+  console.log(`筛选后: ${filtered.length} 个已完成订单`);
+  
   let totalSales = 0;
   let orderCount = 0;
   const salesByPackage = {};
   
-  for (const record of records) {
+  for (const record of filtered) {
     const cells = record.cells;
-    const amount = parseFloat(cells['购买金额(元)']?.value || 0);
-    const packageName = cells['套餐名称']?.value || '未知';
+    const amount = parseFloat(cells[FIELD.orders.amount]?.value || 0);
+    const packageName = cells[FIELD.orders.packageName]?.value || '未知';
     
     totalSales += amount;
     orderCount++;
@@ -89,96 +124,61 @@ async function calculateStats() {
     salesByPackage[packageName] = (salesByPackage[packageName] || 0) + amount;
   }
   
-  // 找出热门套餐
   const topPackage = Object.entries(salesByPackage)
     .sort((a, b) => b[1] - a[1])[0];
   
-  const statsMonth = today.substring(0, 7); // YYYY-MM
+  const statsMonth = today.substring(0, 7);
   
-  console.log(`统计结果：月份=${statsMonth}, 销售额=${totalSales}, 订单数=${orderCount}, 热门=${topPackage?.[0]}`);
+  console.log(`统计结果：月份=${statsMonth}, 销售额=${totalSales}, 订单数=${orderCount}, 热门=${topPackage?.[0] || '无'}`);
   
-  // 检查是否已有该月统计
-  const checkResult = await mcporterCall('query_records', {
-    baseId: CONFIG.BASE_ID,
-    tableId: CONFIG.TABLES.stats,
-    filter: {
-      formula: `统计月份="${statsMonth}"`
-    },
-    limit: 1
-  });
-  
-  const existingRecord = checkResult.data?.records?.[0];
-  
-  if (existingRecord) {
-    // 更新现有统计
-    const recordId = existingRecord.recordId;
-    await mcporterCall('update_records', {
-      baseId: CONFIG.BASE_ID,
-      tableId: CONFIG.TABLES.stats,
-      records: [{
-        recordId,
-        cells: {
-          '总销售额(元)': { value: totalSales },
-          '订单数量': { value: orderCount },
-          '热门套餐': { value: topPackage?.[0] || '' },
-          '备注': { value: `最后更新：${today}` }
-        }
-      }]
-    });
-    console.log(`已更新统计记录 ${recordId}`);
-  } else {
-    // 创建新统计
-    const result = await mcporterCall('create_records', {
-      baseId: CONFIG.BASE_ID,
-      tableId: CONFIG.TABLES.stats,
-      records: [{
-        cells: {
-          '统计月份': { value: statsMonth },
-          '总销售额(元)': { value: totalSales },
-          '订单数量': { value: orderCount },
-          '热门套餐': { value: topPackage?.[0] || '' },
-          '备注': { value: `创建日期：${today}` }
-        }
-      }]
-    });
-    console.log(`已创建统计记录 ${result.newRecordIds[0]}`);
-  }
+  // TODO: 写入收入统计表
   
   return { statsMonth, totalSales, orderCount, topPackage: topPackage?.[0] };
 }
 
-// 2. 检查即将到期的订单（3天内）
 async function checkExpiringOrders() {
   const today = new Date().toISOString().split('T')[0];
   const threeDaysLater = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
   
-  console.log(`检查 ${today} 至 ${threeDaysLater} 到期的订单...`);
+  console.log(`检查所有订单，筛选 ${today} 至 ${threeDaysLater} 到期的已完成订单...`);
   
-  const result = await mcporterCall('query_records', {
-    baseId: CONFIG.BASE_ID,
-    tableId: CONFIG.TABLES.orders,
-    filter: {
-      formula: `AND(IS_AFTER_OR_EQUAL(到期日期, "${today}"), IS_BEFORE_OR_EQUAL(到期日期, "${threeDaysLater}"), 订单状态="已完成")`
-    },
-    limit: 100
-  });
+  const result = await mcporterCall('query_records', [
+    `baseId=${CONFIG.BASE_ID}`,
+    `tableId=${CONFIG.TABLES.orders}`,
+    'limit=1000'
+  ]);
   
   if (!result.data || !result.data.records) {
-    console.log('没有即将到期的订单');
+    console.log('没有订单记录');
     return [];
   }
   
-  const expiringOrders = result.data.records;
-  console.log(`找到 ${expiringOrders.length} 个即将到期的订单`);
+  const allRecords = result.data.records;
   
-  // 生成提醒消息
+  const expiring = allRecords.filter(record => {
+    const cells = record.cells;
+    const expireDate = cells[FIELD.orders.expireDate]?.value;
+    const status = cells[FIELD.orders.status];
+    
+    if (!expireDate || !status) return false;
+    if (status.name !== '已完成') return false;
+    
+    const e = parseDate(expireDate);
+    const t = new Date(today + 'T00:00:00Z');
+    const t3 = new Date(threeDaysLater + 'T00:00:00Z');
+    
+    return e >= t && e <= t3;
+  });
+  
+  console.log(`找到 ${expiring.length} 个即将到期的订单`);
+  
   let message = `📢 **到期提醒** (${today})\n\n`;
   
-  for (const record of expiringOrders) {
+  for (const record of expiring) {
     const cells = record.cells;
-    const expireDate = cells['到期日期']?.value;
-    const packageName = cells['套餐名称']?.value;
-    const customerId = cells['客户ID']?.value;
+    const expireDate = cells[FIELD.orders.expireDate]?.value;
+    const packageName = cells[FIELD.orders.packageName]?.value;
+    const customerId = cells['DgakkR6']?.value;
     const orderId = record.recordId;
     
     message += `- 到期日：${expireDate}\n`;
@@ -188,23 +188,21 @@ async function checkExpiringOrders() {
   }
   
   message += `⏰ 请及时联系客户续费！\n`;
-  message += `[查看CRM](${CONFIG.WORKSPACE})`;
   
   console.log(message);
   
-  // 发送钉钉通知（如果配置了webhook）
   if (CONFIG.DINGTALK_WEBHOOK) {
     sendDingTalkNotification(message);
   }
   
-  return expiringOrders;
+  return expiring;
 }
 
-// 发送钉钉通知
-async function sendDingTalkNotification(message) {
-  exec(`curl -X POST "${CONFIG.DINGTALK_WEBHOOK}" \
+function sendDingTalkNotification(message) {
+  const escaped = message.replace(/"/g, '\\"').replace(/\n/g, '\\n');
+  exec(`curl -s -X POST "${CONFIG.DINGTALK_WEBHOOK}" \
     -H "Content-Type: application/json" \
-    -d '{"msgtype":"markdown","markdown":{"title":"AI助手业务提醒","text":"${message.replace(/"/g, '\\"')}"}}'`, (err, stdout, stderr) => {
+    -d '{"msgtype":"markdown","markdown":{"title":"AI助手业务提醒","text":"${escaped}"}}'`, (err, stdout, stderr) => {
     if (err) {
       console.error('钉钉通知发送失败:', stderr);
     } else {
@@ -213,7 +211,6 @@ async function sendDingTalkNotification(message) {
   });
 }
 
-// 主函数
 async function main() {
   console.log('=== AI助手业务自动化开始 ===');
   
@@ -230,7 +227,6 @@ async function main() {
   }
 }
 
-// 如果直接运行此脚本
 if (require.main === module) {
   main();
 }
