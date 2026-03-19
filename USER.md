@@ -2,16 +2,11 @@
 
 _Learn about the person you're helping. Update this as you go._
 
-- **Name:**
-- **What to call them:**
-- **Pronouns:** _(optional)_
-- **Timezone:**
+- **Name:** 钛钛
+- **What to call them:** 娟儿
+- **Pronouns:** 
+- **Timezone:** Asia/Shanghai
 - **Notes:**
-
-## Context
-
-_(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
-
----
-
-The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
+  - 偏好正式沟通风格
+  - 使用中文交流
+  - 暂无其他特殊要求
