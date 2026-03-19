@@ -9,4 +9,5 @@ _Learn about the person you're helping. Update this as you go._
 - **Notes:**
   - 偏好正式沟通风格
   - 使用中文交流
-  - 暂无其他特殊要求
+  - 文档默认存储到钉钉文档并返回链接
+  - 搜索信息优先使用 Tavily Search

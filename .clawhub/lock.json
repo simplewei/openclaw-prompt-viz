@@ -52,6 +52,14 @@
     "proactivity": {
       "version": "1.0.1",
       "installedAt": 1773804806039
+    },
+    "gateway-notify": {
+      "version": "1.0.5",
+      "installedAt": 1773934715702
+    },
+    "auto-updater": {
+      "version": "1.0.0",
+      "installedAt": 1773935969651
     }
   }
 }

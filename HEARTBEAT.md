@@ -17,3 +17,10 @@
 - Ask what useful check-in or next move would help right now
 - Message the user only when something changed or needs a decision
 - Update ~/proactivity/session-state.md after meaningful follow-through
+
+## Configuration Verification (added 2026-03-19)
+
+- Verify USER.md preferences are up-to-date
+- Check if last proactivity session-state is marked completed
+- Validate MEMORY.md has recent entries
+- Report any configuration drift or missing settings
