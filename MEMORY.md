@@ -24,3 +24,24 @@
     - ✅ Configured Tavily Search (优先搜索工具)
     - ✅ Created website access solution guide (agent-browser headed mode, user-data-dir persistence)
     - Pending: install akshare library (可选，用于金融数据)
+
+## Deliverables (2026-03-20)
+- **决策简报**：《机器人&AI硬件决策简报（2026）》
+  - Type: 1页PPT式决策简报
+  - Content: 市场洞察、机会图谱、风险分析、战略建议
+  - Format: Markdown → 钉钉文档
+  - Target Directory: 1R7q3QmWee9XZaQbfXGzMRQmWxkXOEP2
+  - DingTalk Doc ID: QPGYqjpJYrlev9qkIo2zem6w8akx1Z5N
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/QPGYqjpJYrlev9qkIo2zem6w8akx1Z5N
+  - Sources: Tavily Search (36氪、虎嗅、Lex Fridman、a16z、投资界等)
+  - Key findings:
+    - 7家百亿独角兽聚焦"具身大脑"（VLA）
+    - AI硬件市场2026: $4.158B，智能眼镜$5.6B
+    - 推理成本年降10倍，目标<人力成本1%
+    - 制造暗线：先进封装/末端执行器成瓶颈
+    - 三巨头布局：阿里ATH、字节AI手机、腾讯微信Agent
+
+## Research Notes
+- Tavily Search 已验证可用，API Key配置正确
+- 文档自动存储到钉钉文档流程已打通
+- 高质量信息源建立：36氪、虎嗅、Lex Fridman、a16z、投资界
