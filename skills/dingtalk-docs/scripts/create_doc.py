@@ -22,10 +22,6 @@ from mcporter_utils import run_mcporter, parse_response, get_root_dentry_uuid
 # ============== 安全常量 ==============
 MAX_CONTENT_LENGTH = 50000  # 最大内容长度（字符）
 
-# ============== 默认配置 ==============
-# 用户指定的默认文档存储目录（2026-03-20 小酷容指定）
-DEFAULT_PARENT_UUID = "1R7q3QmWee9XZaQbfXGzMRQmWxkXOEP2"
-
 # ============== 业务函数 ==============
 
 def create_doc(title: str, parent_uuid: str) -> Optional[str]:
@@ -106,31 +102,30 @@ def main():
     print(f"📝 开始创建文档：{title}")
     print("-" * 50)
 
-    # 使用默认指定目录（用户要求所有文档都放此目录）
-    parent_uuid = DEFAULT_PARENT_UUID
-    print(f"📁 目标目录: {parent_uuid}")
-    print(f"   目录链接: https://alidocs.dingtalk.com/i/nodes/{parent_uuid}")
+    # 1. 获取根目录 ID
+    print("步骤 1: 获取根目录 ID...")
+    root_uuid = get_root_dentry_uuid()
+    if not root_uuid:
+        sys.exit(1)
+    print(f"   根目录 ID: {root_uuid}")
 
-    # 2. 创建文档（直接使用指定目录，无需重新获取根目录）
-    print("\n步骤 1: 创建文档...")
-    doc_uuid = create_doc(title, parent_uuid)
+    # 2. 创建文档
+    print("\n步骤 2: 创建文档...")
+    doc_uuid = create_doc(title, root_uuid)
     if not doc_uuid:
         sys.exit(1)
 
     # 3. 写入内容（如果有）
     if content:
-        print("\n步骤 2: 写入内容...")
+        print("\n步骤 3: 写入内容...")
         # 处理转义字符
         content = content.replace('\\n', '\n').replace('\\t', '\t')
         if not write_content(doc_uuid, content):
             sys.exit(1)
-    else:
-        print("\n✓ 无内容需要写入")
 
     print("-" * 50)
     print("✅ 完成！")
     print(f"\n文档链接：https://alidocs.dingtalk.com/i/nodes/{doc_uuid}")
-    print(f"📂 存储位置：指定目录 {parent_uuid}")
 
 if __name__ == '__main__':
     main()

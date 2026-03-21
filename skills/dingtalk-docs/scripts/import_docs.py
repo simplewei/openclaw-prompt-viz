@@ -25,10 +25,6 @@ MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
 MAX_CONTENT_LENGTH = 50000  # 最大内容长度
 ALLOWED_EXTENSIONS = ['.md', '.txt', '.markdown']
 
-# ============== 默认配置 ==============
-# 用户指定的默认文档存储目录（2026-03-20 小酷容指定）
-DEFAULT_PARENT_UUID = "1R7q3QmWee9XZaQbfXGzMRQmWxkXOEP2"
-
 # ============== 安全函数 ==============
 
 def validate_file_extension(filename: str) -> bool:
@@ -135,14 +131,15 @@ def main():
         print(f"⚠️  内容过长，截断到 {MAX_CONTENT_LENGTH} 字符")
         content = content[:MAX_CONTENT_LENGTH]
 
-    # 使用默认指定目录（用户要求所有文档都放此目录）
-    parent_uuid = DEFAULT_PARENT_UUID
-    print(f"📁 目标目录: {parent_uuid}")
-    print(f"   目录链接: https://alidocs.dingtalk.com/i/nodes/{parent_uuid}")
+    # 获取根目录 ID
+    print("\n步骤 2: 获取根目录 ID...")
+    root_uuid = get_root_dentry_uuid()
+    if not root_uuid:
+        sys.exit(1)
 
     # 创建文档
-    print("\n步骤 2: 创建文档...")
-    doc_uuid = create_doc(title, parent_uuid)
+    print("\n步骤 3: 创建文档...")
+    doc_uuid = create_doc(title, root_uuid)
     if not doc_uuid:
         sys.exit(1)
 

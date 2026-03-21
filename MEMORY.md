@@ -8,12 +8,12 @@
   - Next run: 2026-03-20 21:00 北京时间
 
 - `002310每日跟踪` (ID: ec23f3a3-8ce1-4cca-844f-84f45d13730d)
-  - Schedule: 37 0 * * * (UTC)
+  - Schedule: 37 0 * * * (UTC) → 08:30 Asia/Shanghai (周一至周五)
   - Target: Current group chat
   - Task: 东方新能(002310)每日跟踪
-  - Status: ⚠️ 2026-03-20执行失败（数据源访问受限）
-  - Issue: web_search缺API密钥，agent-browser多页面超时，网站反爬虫
-  - Action required: 配置Tavily搜索（已完成），使用agent-browser headed模式，文档见 docs/website-access-solution.md
+  - Status: ✅ 2026-03-21手动执行成功（Tavily Search数据源）
+  - Previous failure: 2026-03-20（Gemini web_search缺API，网站反爬）
+  - Solution: 切换至Tavily Search，已发布钉钉文档
 
 ## Technical Issues
 - 2026-03-20: 财经数据源访问失败
@@ -41,7 +41,22 @@
     - 制造暗线：先进封装/末端执行器成瓶颈
     - 三巨头布局：阿里ATH、字节AI手机、腾讯微信Agent
 
+## Deliverables (2026-03-21)
+- **东方新能(002310)每日跟踪报告**
+  - Type: 深度分析报告（2936字节）
+  - Content: 连续两日涨停分析、龙虎榜资金流向、资产收购进展、风险提示、操作建议
+  - Format: Markdown → 钉钉文档
+  - DingTalk Doc ID: DnRL6jAJMGREo2qluw3Gqkn6WyMoPYe1
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/DnRL6jAJMGREo2qluw3Gqkn6WyMoPYe1
+  - Data Source: Tavily Search
+  - Key findings:
+    - 3月19-20日连续涨停（3.16→3.48元，+21.25%）
+    - 量化打板净买入1.33亿，深股通净买入4895万
+    - 拟2.76亿收购风电资产（海城锐海+电投瑞享）
+    - 风险：限售解禁7亿股、业绩亏损、涨幅过大
+    - 建议：短线观望，中线3.0-3.2元分批建仓
+
 ## Research Notes
 - Tavily Search 已验证可用，API Key配置正确
-- 文档自动存储到钉钉文档流程已打通
+- 文档自动存储到钉钉文档流程已打通（mcporter工具）
 - 高质量信息源建立：36氪、虎嗅、Lex Fridman、a16z、投资界
