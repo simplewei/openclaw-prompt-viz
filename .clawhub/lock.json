@@ -3,63 +3,63 @@
   "skills": {
     "openclaw-tavily-search": {
       "version": "0.1.0",
-      "installedAt": 1774102201761
+      "installedAt": 1774209735405
     },
     "github-cli-tool": {
       "version": "1.0.0",
-      "installedAt": 1774102203111
+      "installedAt": 1774209736844
     },
     "humanizer-zh": {
       "version": "1.0.0",
-      "installedAt": 1774102204310
+      "installedAt": 1774209738241
     },
     "polymarketodds-1-0-0": {
       "version": "1.0.0",
-      "installedAt": 1774102205598
+      "installedAt": 1774209739949
     },
     "notebooklm-skill": {
       "version": "0.1.0",
-      "installedAt": 1774102207672
+      "installedAt": 1774209742599
     },
     "feishu-doc-manager": {
       "version": "1.0.0",
-      "installedAt": 1774102208856
+      "installedAt": 1774209743892
     },
     "feishu-docs": {
       "version": "1.1.1",
-      "installedAt": 1774102211065
+      "installedAt": 1774209746072
     },
     "summarize": {
       "version": "1.0.0",
-      "installedAt": 1774102212156
+      "installedAt": 1774209780773
     },
     "gog": {
       "version": "1.0.0",
-      "installedAt": 1774102213111
+      "installedAt": 1774209783274
     },
     "dingtalk-docs": {
       "version": "0.3.4",
-      "installedAt": 1774102262560
+      "installedAt": 1774209842107
     },
     "self-improving": {
       "version": "1.2.16",
-      "installedAt": 1774102264345
+      "installedAt": 1774209843924
     },
     "ontology": {
       "version": "1.0.4",
-      "installedAt": 1774102265507
+      "installedAt": 1774209845630
     },
     "proactivity": {
       "version": "1.0.1",
-      "installedAt": 1774102266988
+      "installedAt": 1774209847342
     },
     "gateway-notify": {
       "version": "1.0.5",
-      "installedAt": 1774102268681
+      "installedAt": 1774209849967
     },
     "auto-updater": {
       "version": "1.0.0",
-      "installedAt": 1774102269891
+      "installedAt": 1774209851196
     }
   }
 }
