@@ -24,6 +24,7 @@
     - ✅ Configured Tavily Search (优先搜索工具)
     - ✅ Created website access solution guide (agent-browser headed mode, user-data-dir persistence)
     - Pending: install akshare library (可选，用于金融数据)
+- 已解决（2026-03-21）: Tavily Search完全替代Gemini，财经数据获取恢复，首份完整东方新能报告发布
 
 ## Deliverables (2026-03-20)
 - **决策简报**：《机器人&AI硬件决策简报（2026）》
