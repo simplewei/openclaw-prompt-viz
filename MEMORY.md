@@ -145,3 +145,20 @@
   - DingTalk Doc ID: ZQYprEoWonz01ANlFqqgE9x781waOeDk
   - Access URL: https://alidocs.dingtalk.com/i/nodes/ZQYprEoWonz01ANlFqqgE9x781waOeDk
   - Storage: 存入openclaw文件夹（父节点: ndMj49yWjXNaR09OIDDmZwy3J3pmz5aA）
+
+## Deliverables (2026-03-24 - 高管6维度版)
+- **智慧体育场馆业务2025-2026年度建设情况与计划（高管6维度版）**
+  - Type: 年度业务总结与规划（高管视角重构）
+  - Dimension redesign（基于业务高管审核）：
+    1. 业务标准化与制度建设 ← 合并原"标准化"+"制度"
+    2. 人才组织与能力建设 ← 新增（基于人员招聘、馆长薪酬）
+    3. 数字化与智能化 ← 升级（加入AI、智能排赛）
+    4. 品牌建设与客户运营 ← 合并（品牌VI+社群+会员+大众点评）
+    5. 商业模式与创收拓展 ← 明确平台转型方向
+    6. 投资风控与项目管理 ← 合并（安全+成本+承接查验+投资模型）
+  - 依据：严格基于2025年1-4季度工作总结（含四季度深度复盘），每维度100字内
+  - 战略判断："纯场地租赁吸引力不足" → 2026年向"一体化运营平台"转型
+  - Format: Markdown表格 → 钉钉文档
+  - DingTalk Doc ID: PwkYGxZV3ZEM2jegUvvaBm24WAgozOKL
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/PwkYGxZV3ZEM2jegUvvaBm24WAgozOKL
+  - Storage: openclaw文件夹
