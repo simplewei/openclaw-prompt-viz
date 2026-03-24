@@ -37,3 +37,23 @@
 6. 如果发现异常（如成局率<80%、新客<10人/周），立即提醒用户
 
 **状态记录**：在 `memory/YYYY-MM-DD.md` 中记录检查结果和行动项
+
+## 钉钉文档存储规范 (added 2026-03-24)
+
+**默认存储路径**：  
+- 父节点ID：`ndMj49yWjXNaR09OIDDmZwy3J3pmz5aA` (openclaw文件夹)
+- 配置位置：`/root/.openclaw/workspace/config/dingtalk_folders.json`
+
+**创建文档规则**：
+1. 所有新文档优先创建在 `openclaw` 文件夹下
+2. 使用 `mcporter call dingtalk-docs.create_doc_under_node` 时，`parentDentryUuid` 默认使用 `ndMj49yWjXNaR09OIDDmZwy3J3pmz5aA`
+3. 文档命名规范：`[业务领域]_[内容描述]_[YYYY-MM-DD]`（如：`羽毛球运营方案_增强版_2026-03-24`）
+4. 创建后立即写入内容，并记录到 MEMORY.md
+
+**例外情况**：
+- 仅当用户明确要求"存入根目录"或指定其他位置时，才使用其他 parentDentryUuid
+- 已有文档（在openclaw文件夹创建前）可保持不变
+
+**检查点**：
+- 创建钉钉文档前，先读取 `config/dingtalk_folders.json` 确认默认 parentDentryUuid
+- 文档创建成功后，更新 MEMORY.md 的 Deliverables 部分

@@ -101,3 +101,47 @@
 - 价格校准：体验价38元、常规价58元、进阶68元、次卡48元（10次480元/20次880元）
 - 定价依据：参考上海宝山区趣动/闪动平台50-70元市场价，保持竞争力同时保证利润
 - 所有文案模板价格已同步更新
+
+## Deliverables (2026-03-24)
+- **智慧体育场馆业务2025-2026年度建设情况与计划**
+  - Type: 年度业务总结与规划（表格形式）
+  - Content: 6个维度（业务标准化、制度建设、数字化、品牌化、安全管理、其他维度）的2025年建设情况与2026年计划对比
+  - Format: Markdown表格 → 钉钉文档
+  - DingTalk Doc ID: Amq4vjg890127zlpFQQ6BQ4OJ3kdP0wQ
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/Amq4vjg890127zlpFQQ6BQ4OJ3kdP0wQ
+  - Notes: 每维度内容控制在100字以内，基于季度工作总结提炼
+
+## Configuration Update (2026-03-24)
+- **钉钉文档存储规范**：
+  - 创建 `openclaw` 文件夹作为默认存储路径（dentryUuid: ndMj49yWjXNaR09OIDDmZwy3J3pmz5aA）
+  - 配置保存至 `/root/.openclaw/workspace/config/dingtalk_folders.json`
+  - 创建便捷脚本 `scripts/create_dingtalk_doc.sh` 用于文档创建（自动使用openclaw文件夹）
+  - 后续所有钉钉文档创建都应使用此脚本或遵守相同规范
+- **HEARTBEAT.md更新**：添加钉钉文档存储规范检查点
+
+
+## Deliverables (2026-03-24 update)
+- **智慧体育场馆业务2025-2026年度建设情况与计划（专家版）**
+  - Type: 年度业务总结与规划（增强版，含行业专家视角）
+  - Content: 基于完整季度工作总结，6个维度的建设情况与2026年精准计划；四季度总结补充了国金开业、线上矩阵、培训市场、大众点评收益等细节
+  - Format: Markdown表格 → 钉钉文档
+  - DingTalk Doc ID: 14dA3GK8gjg2mnK3t77m3OO4J9ekBD76
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/14dA3GK8gjg2mnK3t77m3OO4J9ekBD76
+  - Expert perspective additions:
+    - 标准化：强调"全周期管理手册"和"项目筛选退出机制"
+    - 数字化：AI客服、智能排赛、公私域流量闭环
+    - 品牌化："场馆+IP+活动"模式、馆长个人IP打造
+    - 安全：智慧监测平台、双重预防机制
+    - 创收：B端赋能计划、会员生态、数据变现、+30%营收目标
+    - 战略跃迁：从"项目管理"向"平台运营"转型
+
+## Deliverables (2026-03-24 final)
+- **智慧体育场馆业务2025-2026年度建设情况与计划（专家版_v2）**
+  - Type: 年度业务总结与规划（精炼最终版）
+  - Content: 基于完整季度总结（含四季度详细总结），6个维度建设情况与2026年专家视角计划；各维度控制在100字内
+  - 重点补充：国金体育馆开业、线上矩阵（企业微信/小红书/大众点评）、培训市场拓展、大众点评收益、投资建设模型、创收多元化路径
+  - 2026年专家视角：全周期标准化、智能化升级、品牌体系化、安全主动预防、数据驱动创收、平台运营跃迁
+  - Format: Markdown表格 → 钉钉文档
+  - DingTalk Doc ID: ZQYprEoWonz01ANlFqqgE9x781waOeDk
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/ZQYprEoWonz01ANlFqqgE9x781waOeDk
+  - Storage: 存入openclaw文件夹（父节点: ndMj49yWjXNaR09OIDDmZwy3J3pmz5aA）

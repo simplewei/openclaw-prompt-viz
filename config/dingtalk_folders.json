@@ -1,0 +1,8 @@
+{
+  "default_parent_dentry_uuid": "ndMj49yWjXNaR09OIDDmZwy3J3pmz5aA",
+  "folders": {
+    "openclaw": "ndMj49yWjXNaR09OIDDmZwy3J3pmz5aA",
+    "root": "4lgGw3P8vR0A15aDFQYoq0jK85daZ90D"
+  },
+  "note": "以后所有钉钉文档创建都应使用default_parent_dentry_uuid作为父节点"
+}
