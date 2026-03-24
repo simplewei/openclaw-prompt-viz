@@ -1,0 +1,69 @@
+# 东方新能(002310)每日跟踪报告
+
+**报告日期**: 2026-03-24 | **前一交易日**: 2026-03-23
+**数据源**: ✅ Tavily Search
+
+---
+
+## 📈 核心数据摘要
+
+| 指标 | 状态 | 备注 |
+|------|------|------|
+| 股价表现 | 检测到涨停信息（详见来源） | 前一交易日收盘价待确认 |
+| 龙虎榜/资金流向 | [龙虎榜/资金数据](https://finance.sina.com.cn/stock/aiassist/lgbzz/2026-03-23/doc-inhrynrt4088384.shtml) | 建议查询东方财富/雪球 |
+| 重大新闻 | ✅ 已提取 | 见下方列表 |
+
+---
+
+## 📰 重要新闻与公告
+
+- [东方新能(002310.SZ)资讯公告-PC_HSF10资料](https://emweb.eastmoney.com/PC_HSF10/NewsBulletin/Index?type=soft&code=SZ002310)
+- [东方新能(002310.SZ)资讯公告-PC_HSF10资料 - 东方财富网](http://emweb.eastmoney.com/PC_HSF10/NewsBulletin/Index?type=web&code=SZ002310)
+- [东方新能2.32(--%)_公司公告](https://vip.stock.finance.sina.com.cn/corp/go.php/vCB_AllBulletin/stockid/002310.phtml?ftype=gszc)
+- [东方新能3.48(10.13%)_公司公告](http://vip.stock.finance.sina.com.cn/corp/go.php/vCB_AllBulletin/stockid/002310.phtml?ftype=zgsmsyxs)
+- [东方新能2.49(2.89%)_公司公告](https://vip.stock.finance.sina.com.cn/corp/go.php/vCB_AllBulletin/stockid/002310.phtml?ftype=ndbgzy)
+
+---
+
+## 💰 资金动向
+
+[龙虎榜/资金数据](https://finance.sina.com.cn/stock/aiassist/lgbzz/2026-03-23/doc-inhrynrt4088384.shtml)
+
+---
+
+## ⚠️  风险提示
+
+- 需关注限售股解禁情况（如之前提及的7亿股）
+- 公司持续亏损，基本面待改善
+
+---
+
+## 💡 操作建议
+
+🔴 短线：已连板，谨慎追高，关注开板信号
+🟡 中线：如回落至3.0-3.2元区间，可分批建仓
+🟢 长线：需观察资产收购后的业绩转化情况
+
+---
+
+## 🔧 技术状态
+
+- **健康检查**: 未执行
+- **数据源详情**: Tavily Search ✅ 正常
+- **备用方案**: 未触发
+
+---
+
+## 📋 手动查询建议
+
+如果自动数据不完整，请手动访问：
+
+- **东方财富**: https://quote.eastmoney.com/sz002310.html
+- **雪球**: https://xueqiu.com/S/002310
+- **巨潮资讯**: http://www.cninfo.com.cn （搜索 002310）
+- **新浪财经**: https://finance.sina.com.cn/realstock/company/sh002310
+
+---
+
+*报告生成时间: 2026-03-24 01:48:16*
+*自动任务，如有问题请人工复核*
