@@ -24,3 +24,16 @@
 - Check if last proactivity session-state is marked completed
 - Validate MEMORY.md has recent entries
 - Report any configuration drift or missing settings
+
+## 羽毛球俱乐部运营反思检查 (added 2026-03-24)
+
+**检查频率**：每周一上午  
+**动作**：
+1. 检查是否需要填写本周周报（上周三至本周二的数据）
+2. 查看 `/root/.openclaw/workspace/羽毛球俱乐部散客组局运营方案.md` 中的"立即行动清单"
+3. 检查群内是否有需要发布的"周总结+下周预告"
+4. 评估冷启动进程：是否还需要种子填充？自然报名时间是否<2小时？
+5. 检查各平台文案效果：哪个平台转化最高？是否需要调整风格？
+6. 如果发现异常（如成局率<80%、新客<10人/周），立即提醒用户
+
+**状态记录**：在 `memory/YYYY-MM-DD.md` 中记录检查结果和行动项

@@ -60,32 +60,24 @@
     - 建议：短线观望，中线3.0-3.2元分批建仓
 
 ## Deliverables (2026-03-24)
-- **东方新能(002310)每日跟踪系统改进**
-  - Type: 系统加固（预防性开发）
-  - Components:
-    - `scripts/health_check_002310.py` - 健康检查脚本（80%健康度阈值）
-    - `scripts/daily_002310_enhanced.py` - 增强版跟踪脚本（零依赖+优雅降级）
-    - `scripts/README_002310.md` - 运维手册
-  - Test result: ✅ 成功生成报告 `daily_report_002310_2026-03-24.txt`
+- **羽毛球俱乐部散客组局运营方案（增强版）v2.1v2.1**
+  - Type: 运营优化方案（12442字节）
+  - Content: 基于真实运营数据+用户反馈进行二次优化
+  - Corrections:
+    - 地址修正：真陈路719号（原79号）
+    - 价格调整：体验价38元（原35）、常规价58元（原55）、次卡48元（原45）
+    - 价格依据：参考上海宝山区趣动/闪动平台50-70元市场价，定位中档偏下
   - Key improvements:
-    - 前置健康检查（Tavily API + 网站连通性）
-    - 多源冗余矩阵（主: Tavily, 备: agent-browser）
-    - 优雅降级：任何失败都输出可用框架报告
-    - 零 pip 依赖（使用 urllib 标准库）
-
-- **国内AI媒体动态监控系统**
-  - Type: 新增简报类型（科技媒体监测）
-  - Components:
-    - `scripts/ai_media_monitor.py` - 主程序（Tavily聚合14家媒体）
-    - `scripts/health_check_ai_media.py` - 媒体连通性检查
-    - `scripts/README_ai_media.md` - 运维概览
-  - Test result: ✅ 成功生成 `ai_media_report_2026-03-24.txt` (20条新闻)
-  - Data sources: 36氪、虎嗅、量子位、机器之心、雷锋网、钛媒体、界面新闻等
-  - Features:
-    - 单次Tavily查询覆盖多site
-    - 自动分类（大模型/商业/融资/应用/技术/政策）
-    - 关键洞察生成
-    - 快速API连通性检查
+    - 冷启动人工填充保底6人（前5场）
+    - 人群画像4类：职场新人、家庭型、技术型、社交型
+    - 平台文案4种风格：理性/情感/简洁/幽默
+    - 群聊话术：情绪价值+社交证明+行动指令
+    - 定期反思：周报+半月复盘+数据追踪
+    - 教练角色：社交催化剂
+  - Format: Markdown → 钉钉文档
+  - DingTalk Doc ID: 14dA3GK8gjg2mnK3t77GedbwJ9ekBD76
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/14dA3GK8gjg2mnK3t77GedbwJ9ekBD76
+  - Notes: 已全部替换价格为更符合市场实际的数值，地址719号，所有模板同步更新
 
 ## Research Notes
 - Tavily Search 已验证可用，API Key配置正确（需使用 Authorization Bearer header）
@@ -93,6 +85,7 @@
 - 高质量信息源建立：36氪、虎嗅、Lex Fridman、a16z、投资界
 - **系统健壮性提升**: 通过健康检查+冗余+降级，单点故障不再导致任务失败
 - **新增AI媒体监控**: 可自动追踪国内AI领域最新动态和商业竞争态势（20条/周）
+- **羽毛球运营深度洞察**: 冷启动需人工填充、从众效应利用、教练角色重塑为社交催化剂、种子用户池建立策略
 
 
 
@@ -102,3 +95,9 @@
 - 高质量信息源建立：36氪、虎嗅、Lex Fridman、a16z、投资界
 - **系统健壮性提升**: 通过健康检查+冗余+降级，单点故障不再导致任务失败
 
+
+## Price & Address Update (2026-03-24修正)
+- 羽毛球运营方案v2.1：地址确认为真陈路719号（非79号）
+- 价格校准：体验价38元、常规价58元、进阶68元、次卡48元（10次480元/20次880元）
+- 定价依据：参考上海宝山区趣动/闪动平台50-70元市场价，保持竞争力同时保证利润
+- 所有文案模板价格已同步更新
