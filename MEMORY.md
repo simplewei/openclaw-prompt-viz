@@ -73,6 +73,29 @@
     - 优雅降级：任何失败都输出可用框架报告
     - 零 pip 依赖（使用 urllib 标准库）
 
+- **国内AI媒体动态监控系统**
+  - Type: 新增简报类型（科技媒体监测）
+  - Components:
+    - `scripts/ai_media_monitor.py` - 主程序（Tavily聚合14家媒体）
+    - `scripts/health_check_ai_media.py` - 媒体连通性检查
+    - `scripts/README_ai_media.md` - 运维概览
+  - Test result: ✅ 成功生成 `ai_media_report_2026-03-24.txt` (20条新闻)
+  - Data sources: 36氪、虎嗅、量子位、机器之心、雷锋网、钛媒体、界面新闻等
+  - Features:
+    - 单次Tavily查询覆盖多site
+    - 自动分类（大模型/商业/融资/应用/技术/政策）
+    - 关键洞察生成
+    - 快速API连通性检查
+
+## Research Notes
+- Tavily Search 已验证可用，API Key配置正确（需使用 Authorization Bearer header）
+- 文档自动存储到钉钉文档流程已打通（mcporter工具）
+- 高质量信息源建立：36氪、虎嗅、Lex Fridman、a16z、投资界
+- **系统健壮性提升**: 通过健康检查+冗余+降级，单点故障不再导致任务失败
+- **新增AI媒体监控**: 可自动追踪国内AI领域最新动态和商业竞争态势（20条/周）
+
+
+
 ## Research Notes
 - Tavily Search 已验证可用，API Key配置正确（需使用 Authorization Bearer header）
 - 文档自动存储到钉钉文档流程已打通（mcporter工具）
