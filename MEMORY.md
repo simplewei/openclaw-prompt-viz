@@ -201,3 +201,28 @@
   - Access URL: https://alidocs.dingtalk.com/i/nodes/3NwLYZXWyn3A1e7jFQQMMwv7VkyEqBQm
   - Storage: openclaw文件夹
   - Target audience: 业务决策层、董事会、投资人
+
+## Deliverables (2026-03-25 - 价值投资分析)
+- **诺和诺德（Novo Nordisk）价值投资分析报告**
+  - Type: 深度价值投资分析（7431字节）
+  - Content: 从价值投资框架全面评估诺和诺德，包括财务健康度、护城河分析、增长前景、风险因素、内在价值估算和投资建议
+  - 核心发现：
+    - **估值极度 depressed**：PE 10.46x（历史最低），安全边际充足
+    - **财务质量卓越**：ROE 48%，EBITDA margin 48%，但2025 FCF为负（-349亿 DKK）
+    - **专利悬崖冲击**：司美格鲁肽中国专利已于2026年3月20日到期，仿制药2026年上市
+    - **2026负增长预警**：公司指引收入下降5-13%
+    - **竞争加剧**：礼来Zepbound 2025增长175%，市场份额升至57%
+    - **长期市场巨大**：全球肥胖症渗透率<5%，中国GLP-1市场2032年超千亿
+    - **内在价值估算**：DCF和PE倒推目标价$65-85，当前$37提供50%+上行空间
+  - Investment Thesis: "谨慎观望，分批建仓" - 当前估值反映最坏情况，但价值陷阱风险存在
+  - Format: Markdown → 钉钉文档
+  - DingTalk Doc ID: 0eMKjyp813lDXgo9hK477D4DVxAZB1Gv
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/0eMKjyp813lDXgo9hK477D4DVxAZB1Gv
+  - Storage: openclaw文件夹
+  - Data sources: Tavily Search, Yahoo Finance, 公司财报, 医药行业研报
+  - 分析涵盖时间：2025年全年数据、2026 Q1趋势、专利到期影响
+  - Key metrics snapshot:
+    - PE TTM: 10.46x | ROE: 48.21% | PS: 0.97x | Dividend: 3.60%
+    - 2025收入: 3091亿 DKK (+10%) | 2026指引: -5%至-13%
+    - 司美格鲁肽占比: 73% | 肥胖护理增长: +31%
+    - 市值: 1.11万亿 DKK | 自由现金流目标: 350-450亿 DKK (2026)
