@@ -162,3 +162,42 @@
   - DingTalk Doc ID: PwkYGxZV3ZEM2jegUvvaBm24WAgozOKL
   - Access URL: https://alidocs.dingtalk.com/i/nodes/PwkYGxZV3ZEM2jegUvvaBm24WAgozOKL
   - Storage: openclaw文件夹
+
+## Deliverables (2026-03-25)
+- **羽毛球俱乐部散客组局运营方案（高管优化版_v3）**
+  - Type: 战略运营方案（高管视角重构，7796字节）
+  - 核心增设内容：
+    - 战略定位与投资逻辑（从场地租赁→社交运动服务平台）
+    - 财务模型：收入预测（3个月48,240元）、成本结构（22,762元）、敏感性分析、盈亏平衡点（5.2人/场）
+    - 核心杠杆与优先级（P0/P1/P2矩阵，聚焦3件必成事）
+    - 规模化路径：单场馆跑通标准 → 复制第2个场馆 → 输出SOP
+    - 风险矩阵：7类风险+概率/影响/应急预案+决策阈值
+    - 资源需求：人力（教练+种子用户）、物资、技术（无额外投入），总成本约16,212元
+    - 数据仪表盘：8大核心指标+自动触发阈值（红灯/黄灯/绿灯）
+    - 90天快速验证计划：分3阶段（种子期→增长期→优化期），每阶段明确目标、行动、成功标志、Pivot选项
+  - 基于v2.1（价格38/58/68/48元，地址真陈路719号）进行高管层升级
+  - Format: Markdown → 钉钉文档
+  - DingTalk Doc ID: OG9lyrgJPzYEoaqKUXX5Py9eWzN67Mw4
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/OG9lyrgJPzYEoaqKUXX5Py9eWzN67Mw4
+  - Storage: openclaw文件夹
+  - Key message: 承认冷启动现实 → 主动填充 → 快速正反馈 → 标准化输出 → 规模化复制
+
+## Deliverables (2026-03-25 - 高管决策版)
+- **智慧体育场馆业务2025-2026战略总结与计划（高管决策版）**
+  - Type: 高管汇报材料（5270字节）
+  - 核心价值：
+    - 战略总览：2025年成就→2026年"平台化跃迁"主题
+    - 6维度表格：每项计划均含量化目标、行动步骤、监测频率
+    - 关键战略取舍：聚焦3自营项目、放弃粗放扩张、投资比例分配
+    - 风险主动管理：风险矩阵+应对措施+决策点时间表
+    - 资源需求明确：人力、预算、试点授权
+  - 新增高管思维要素：
+    - 量化目标全覆盖（无空泛词汇）
+    - 竞争壁垒构建（平台模式、数据驱动、品牌溢价）
+    - 商业模式转型路径（租赁→平台）
+    - 分阶段决策机制（Q1末/Q2末/Q3末/Q4末）
+  - Format: Markdown → 钉钉文档
+  - DingTalk Doc ID: 3NwLYZXWyn3A1e7jFQQMMwv7VkyEqBQm
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/3NwLYZXWyn3A1e7jFQQMMwv7VkyEqBQm
+  - Storage: openclaw文件夹
+  - Target audience: 业务决策层、董事会、投资人
