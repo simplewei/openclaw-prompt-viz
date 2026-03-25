@@ -202,6 +202,84 @@
   - Storage: openclaw文件夹
   - Target audience: 业务决策层、董事会、投资人
 
+## Deliverables (2026-03-25 - 组合推荐)
+- **价值投资建仓组合推荐（三版本）**
+  - Type: 投资组合方案（14426字节）
+  - Content: 基于价值投资框架构建的实操性组合，包括8个核心/卫星持仓、三种风险偏好配置方案、建仓策略、监控清单、税务考量
+  - **核心持仓（70-80%）**：
+    1. 伯克希尔哈撒韦 (BRK.B) - 15% - 最稳健的价值基座
+    2. 诺和诺德 (NVO) - 15% - 深度价值，PE 10.5x历史最低
+    3. 摩根大通 (JPM) - 10% - 银行股受益于"higher for longer"
+    4. 可口可乐 (KO) - 10% - 品牌护城河 + 股息增长
+    5. 宝洁 (PG) - 10% - 必需消费 + 69年股息增长
+    6. 丰田汽车 (TM) - 10% - 日本价值，估值低，转型潜力
+  - **卫星持仓（20-30%）**：
+    7. EDV - 15% - 超长期国债ETF，利率对冲工具
+    8. 能源巨头 (XOM/CVX) - 10-15% - 通胀对冲 + 现金流
+  - **三种配置方案**：
+    - 保守型：侧重稳定+防御（预期年化5-8%）
+    - 平衡型（推荐）：均衡成长+价值（预期年化8-12%）
+    - 进取型：侧重深度价值+催化剂（预期年化12-18%）
+  - 返回全部3个方案详细权重、目标价、止损价
+  - 建仓策略：分3-6个月分批投入，每次回调>10%加速买入
+  - 监控清单：宏观指标（10年收益率、CPI、美联储政策）+ 个股基本面
+  - 税务提示：EDV免州税，股息30%预扣（中国投资者）
+  - 投资心法：价格是付的，价值是得到的；逆向思考；长期持有
+  - Format: Markdown → 钉钉文档
+  - DingTalk Doc ID: ndMj49yWjXNaR09OIDwMp4xBJ3pmz5aA
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/ndMj49yWjXNaR09OIDwMp4xBJ3pmz5aA
+  - Storage: openclaw文件夹
+  - Target audience: 希望系统性构建设备投资的个人投资者
+  - Key message: 价值投资不是找"便宜货"，而是买"优质且低估"的公司，并长期持有；多元化+耐心=长期复利
+
+## Deliverables (2026-03-25 - 价值投资分析)
+- **诺和诺德（Novo Nordisk）价值投资分析报告**
+  - Type: 深度价值投资分析（7431字节）
+  - Content: 从价值投资框架全面评估诺和诺德，包括财务健康度、护城河分析、增长前景、风险因素、内在价值估算和投资建议
+  - 核心发现：
+    - **估值极度 depressed**：PE 10.46x（历史最低），安全边际充足
+    - **财务质量卓越**：ROE 48%，EBITDA margin 48%，但2025 FCF为负（-349亿 DKK）
+    - **专利悬崖冲击**：司美格鲁肽中国专利已于2026年3月20日到期，仿制药2026年上市
+    - **2026负增长预警**：公司指引收入下降5-13%
+    - **竞争加剧**：礼来Zepbound 2025增长175%，市场份额升至57%
+    - **长期市场巨大**：全球肥胖症渗透率<5%，中国GLP-1市场2032年超千亿
+    - **内在价值估算**：DCF和PE倒推目标价$65-85，当前$37提供50%+上行空间
+  - Investment Thesis: "谨慎观望，分批建仓" - 当前估值反映最坏情况，但价值陷阱风险存在
+  - Format: Markdown → 钉钉文档
+  - DingTalk Doc ID: 0eMKjyp813lDXgo9hK477D4DVxAZB1Gv
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/0eMKjyp813lDXgo9hK477D4DVxAZB1Gv
+  - Storage: openclaw文件夹
+  - Data sources: Tavily Search, Yahoo Finance, 公司财报, 医药行业研报
+  - 分析涵盖时间：2025年全年数据、2026 Q1趋势、专利到期影响
+  - Key metrics snapshot:
+    - PE TTM: 10.46x | ROE: 48.21% | PS: 0.97x | Dividend: 3.60%
+    - 2025收入: 3091亿 DKK (+10%) | 2026指引: -5%至-13%
+    - 司美格鲁肽占比: 73% | 肥胖护理增长: +31%
+    - 市值: 1.11万亿 DKK | 自由现金流目标: 350-450亿 DKK (2026)
+
+## Deliverables (2026-03-25 - 债市分析)
+- **EDV_Vanguard价值投资分析报告**
+  - Type: 债券ETF深度分析（8895字节）
+  - Content: 全面剖析Vanguard Extended Duration Treasury ETF (EDV)，包括产品特性、历史表现、风险收益特征、价值投资评估
+  - 核心要点：
+    - **产品特性**：投资20-30年期美国国债零息债券（STRIPS），久期约24年，费率0.05%，AUM $4.7B
+    - **历史表现**：2022年-39.15%，2024年-12.75%，3年化-3.4%，5年化-5.2%
+    - **极端利率敏感性**：久期24年意味着利率±1% → 价格±24%，是市场最激进的长债工具之一
+    - **与TLT对比**：EDV久期更长、波动更大、收益率略高，费率更低（0.05% vs 0.09%）
+    - **价值框架**：非传统"价值股"，而是"利率方向性工具"，内在价值取决于收益率曲线预期
+    - **情景分析**：
+      - 衰退降息（10年2.5%）：+48%回报
+      - 横盘震荡（10年4-4.5%）：+4%回报
+      - 通胀反弹（10年5.5%）：-24%回报
+    - **适用场景**：明确看多长期债券（预期美联储大幅降息）时使用；不适合追求当期收入或无法承受大回撤的投资者
+    - **配置建议**：5-10%作为战术性卫星持仓，不超20%；最佳入场点在10年收益率≥5%时
+  - Format: Markdown → 钉钉文档
+  - DingTalk Doc ID: 14dA3GK8gjg2mnK3t7KrYmlnJ9ekBD76
+  - Access URL: https://alidocs.dingtalk.com/i/nodes/14dA3GK8gjg2mnK3t7KrYmlnJ9ekBD76
+  - Storage: openclaw文件夹
+  - Data sources: Vanguard官网、ETF Database、Morningstar、TotalRealReturns、Tavily Search
+  - 分析关键词：STRIPS、零息国债、久期24年、利率风险、通胀风险、2022年债灾、降息预期
+
 ## Deliverables (2026-03-25 - 价值投资分析)
 - **诺和诺德（Novo Nordisk）价值投资分析报告**
   - Type: 深度价值投资分析（7431字节）
