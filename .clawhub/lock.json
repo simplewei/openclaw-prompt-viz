@@ -60,6 +60,10 @@
     "auto-updater": {
       "version": "1.0.0",
       "installedAt": 1774555345490
+    },
+    "image2text-ocr": {
+      "version": "0.1.0",
+      "installedAt": 1774598824990
     }
   }
 }
