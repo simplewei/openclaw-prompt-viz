@@ -1,0 +1,9 @@
+{
+  "success": false,
+  "error": "参数错误",
+  "message": "参数错误。请检查输入参数是否正确，参考工具说明调整参数后重试",
+  "code": "PARAM_ERROR",
+  "retryable": false,
+  "trace_id": "21030ead17746054746385289e0c3a",
+  "technical_detail": "调用失败，原因: 调用失败，原因: 调用远程服务业务异常, 出参校验不通过。root.success当前值：false， 预期值：true，所有值：{\"success\":false,\"errorCode\":\"52600007\"} "
+}
