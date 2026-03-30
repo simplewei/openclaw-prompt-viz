@@ -3,67 +3,67 @@
   "skills": {
     "openclaw-tavily-search": {
       "version": "0.1.0",
-      "installedAt": 1774555321612
+      "installedAt": 1774901486720
     },
     "github-cli-tool": {
       "version": "1.0.0",
-      "installedAt": 1774555322961
+      "installedAt": 1774901521548
     },
     "humanizer-zh": {
       "version": "1.0.0",
-      "installedAt": 1774555324358
+      "installedAt": 1774901522963
     },
     "polymarketodds-1-0-0": {
       "version": "1.0.0",
-      "installedAt": 1774555325785
+      "installedAt": 1774901524513
     },
     "notebooklm-skill": {
       "version": "0.1.0",
-      "installedAt": 1774555328465
+      "installedAt": 1774901527311
     },
     "feishu-doc-manager": {
       "version": "1.0.0",
-      "installedAt": 1774555329842
+      "installedAt": 1774901528390
     },
     "feishu-docs": {
       "version": "1.1.1",
-      "installedAt": 1774555332516
+      "installedAt": 1774901530548
     },
     "summarize": {
       "version": "1.0.0",
-      "installedAt": 1774555333906
+      "installedAt": 1774901531625
     },
     "gog": {
       "version": "1.0.0",
-      "installedAt": 1774555334905
+      "installedAt": 1774901532705
     },
     "dingtalk-docs": {
       "version": "0.3.4",
-      "installedAt": 1774555337310
+      "installedAt": 1774901534995
     },
     "self-improving": {
       "version": "1.2.16",
-      "installedAt": 1774555339037
+      "installedAt": 1774901537603
     },
     "ontology": {
       "version": "1.0.4",
-      "installedAt": 1774555340630
+      "installedAt": 1774901538973
     },
     "proactivity": {
       "version": "1.0.1",
-      "installedAt": 1774555342353
+      "installedAt": 1774901540689
     },
     "gateway-notify": {
       "version": "1.0.5",
-      "installedAt": 1774555344310
+      "installedAt": 1774901582031
     },
     "auto-updater": {
       "version": "1.0.0",
-      "installedAt": 1774555345490
+      "installedAt": 1774901583113
     },
     "image2text-ocr": {
       "version": "0.1.0",
-      "installedAt": 1774598824990
+      "installedAt": 1774901586288
     }
   }
 }
